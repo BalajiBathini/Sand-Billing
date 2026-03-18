@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- Updated Form View with Mobile View Actions -->
+        <record id="SAND_BILLING_receipt_form_mobile" model="ir.ui.view">
+            <field name="name">sand.billing.receipt.form.mobile</field>
+            <field name="model">sand.billing.receipt</field>
+            <field name="inherit_id" ref="SAND_BILLING_receipt_form"/>
+            <field name="arch" type="xml">
+                <header position="replace">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm &amp; Generate QR" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_print_receipt" type="object" string="Print Receipt" class="oe_highlight" />
+                        <button name="action_get_mobile_view_url" type="object" string="📱 Mobile View" class="oe_link" invisible="state == 'draft'"/>
+                        <button name="action_share_mobile_receipt" type="object" string="📤 Share Receipt" class="oe_link" invisible="state == 'draft'"/>
+                        <button name="action_reset_to_draft" type="object" string="Reset to Draft" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                </header>
+                <xpath expr="//group[1]" position="after">
+                    <group string="Mobile View &amp; Sharing" invisible="state == 'draft'">
+                        <field name="mobile_view_url" readonly="1" widget="url"/>
+                        <field name="mobile_qr_code" widget="image" nolabel="1" options="{'size': [150, 150]}" invisible="not mobile_qr_code"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Share Wizard Form View -->
+        <record id="sand_receipt_share_wizard_form" model="ir.ui.view">
+            <field name="name">sand.receipt.share.wizard.form</field>
+            <field name="model">sand.receipt.share.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Share Mobile Receipt">
+                    <group>
+                        <field name="receipt_id" readonly="1"/>
+                        <field name="receipt_number" readonly="1"/>
+                        <field name="mobile_url" readonly="1" widget="url"/>
+                    </group>
+
+                    <group string="QR Code">
+                        <field name="qr_code_image" widget="image" nolabel="1" options="{'size': [200, 200]}"/>
+                    </group>
+
+                    <group string="Share Message">
+                        <field name="message" nolabel="1"/>
+                    </group>
+
+                    <footer>
+                        <button name="action_copy_url" type="object" string="📋 Copy URL" class="btn-primary"/>
+                        <button name="action_send_email" type="object" string="✉️ Send via Email" class="btn-info"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Share Wizard -->
+        <record id="action_sand_receipt_share_wizard" model="ir.actions.act_window">
+            <field name="name">Share Receipt</field>
+            <field name="res_model">sand.receipt.share.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+</odoo>

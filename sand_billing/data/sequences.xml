@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Receipt ID Sequence -->
+        <record id="seq_SAND_BILLING_receipt" model="ir.sequence">
+            <field name="name">Sand Billing Receipt Sequence</field>
+            <field name="code">sand.billing.receipt</field>
+            <field name="prefix">RCP/%(year)s%(month)s/</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Dispatch ID Sequence -->
+        <record id="seq_sand_dispatch_id" model="ir.sequence">
+            <field name="name">Sand Dispatch ID Sequence</field>
+            <field name="code">sand.dispatch.id</field>
+            <field name="prefix">DISP/%(year)s%(month)s/</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+        </record>
+    </data>
+</odoo>
+
+
+
