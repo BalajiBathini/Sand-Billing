@@ -17,7 +17,7 @@ class SandMobileViewController(http.Controller):
 
         # Render the template with context
         return request.render(
-            'SAND_BILLING.sand_mobile_qr_scanner',
+            'sand_billing.sand_mobile_qr_scanner',
             {
                 'receipt_id': receipt_id,
             }
