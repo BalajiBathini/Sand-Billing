@@ -112,7 +112,7 @@ class SandBillingReceipt(models.Model):
 
     def action_print_receipt(self):
         """Generate thermal receipt"""
-        return self.env.ref('SAND_BILLING.action_sand_receipt_report').report_action(self)
+        return self.env.ref('sand_billing.action_sand_receipt_report').report_action(self)
 
     def action_reset_to_draft(self):
         """Reset receipt back to draft"""
