@@ -3,7 +3,7 @@
         <template id="report_sand_receipt">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="SAND_BILLING.report_sand_receipt_document" />
+                    <t t-call="sand_billing.report_sand_receipt_document" />
                 </t>
             </t>
         </template>
@@ -11,7 +11,7 @@
         <template id="report_sand_receipt_html">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="SAND_BILLING.report_sand_receipt_document_html" />
+                    <t t-call="sand_billing.report_sand_receipt_document_html" />
                 </t>
             </t>
         </template>
