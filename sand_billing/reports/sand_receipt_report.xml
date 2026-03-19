@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_sand_receipt_report" model="ir.actions.report">
+            <field name="name">Sand Receipt</field>
+            <field name="model">sand.billing.receipt</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">sand_billing.report_sand_receipt_html</field>
+            <field name="binding_model_id" ref="model_sand_billing_receipt" />
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_sand_receipt_report_pdf" model="ir.actions.report">
+            <field name="name">Sand Receipt PDF</field>
+            <field name="model">sand.billing.receipt</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sand_billing.report_sand_receipt</field>
+            <field name="binding_model_id" ref="model_sand_billing_receipt" />
+        </record>
+    </data>
+</odoo>
