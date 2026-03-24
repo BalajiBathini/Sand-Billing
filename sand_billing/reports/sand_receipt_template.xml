@@ -24,19 +24,30 @@
                     <!-- CONSUMER COPY -->
                     <div style="margin-bottom: 0;">
                         <!-- Header -->
-                        <div style="text-align: center; margin-bottom: 2mm;">
-                            <t t-if="doc.company_id.logo">
-                                <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
-                                     style="max-width: 20mm; height: auto;" alt="Company Logo"/>
-                            </t>
-                            <div style="margin-top: 0.5mm; font-size: 10pt; font-weight: bold;">
-                                <t t-out="doc.company_id.name" />
-                            </div>
-                            <div style="font-size: 8pt;">MANAGEMENT SYSTEM</div>
+                        <!-- Header -->
+                        <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 20mm; vertical-align: middle;">
+                                        <t t-if="doc.company_id.logo">
+                                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
+                                                 style="max-width: 18mm; height: auto;" alt="Logo"/>
+                                        </t>
+                                    </td>
+                                    <td style="vertical-align: middle; padding-left: 2mm;">
+                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT</div>
+                                        <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
+                                        <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
 
-                        <!-- Copy Type -->
-                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 9pt;">
+                        <!-- Registration Info -->
+                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
+                            GENERAL CONSUMER
+                        </div>
+                        <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
                             Consumer Copy
                         </div>
 
@@ -44,24 +55,24 @@
                         <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
                             <table style="width: 100%; border-collapse: collapse;">
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order ID</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Registration ID</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip No</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip Number</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.trip_no" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Customer Name</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Name</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_name" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Customer Mobile</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Mobile</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_mobile" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Sand Quantity</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.sand_quantity)" /></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -69,22 +80,18 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %H:%M')" /></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Mobile</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_phone" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle No</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.vehicle_no" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Address</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Address</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.address" /></td>
                                 </tr>
                             </table>
@@ -100,19 +107,30 @@
                     <!-- DRIVER COPY -->
                     <div>
                         <!-- Header -->
-                        <div style="text-align: center; margin-bottom: 2mm;">
-                            <t t-if="doc.company_id.logo">
-                                <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
-                                     style="max-width: 20mm; height: auto;" alt="Company Logo"/>
-                            </t>
-                            <div style="margin-top: 0.5mm; font-size: 10pt; font-weight: bold;">
-                                <t t-out="doc.company_id.name" />
-                            </div>
-                            <div style="font-size: 8pt;">MANAGEMENT SYSTEM</div>
+                        <!-- Header -->
+                        <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 20mm; vertical-align: middle;">
+                                        <t t-if="doc.company_id.logo">
+                                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
+                                                 style="max-width: 18mm; height: auto;" alt="Logo"/>
+                                        </t>
+                                    </td>
+                                    <td style="vertical-align: middle; padding-left: 2mm;">
+                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT</div>
+                                        <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
+                                        <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
 
-                        <!-- Copy Type -->
-                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 9pt;">
+                        <!-- Registration Info -->
+                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
+                            GENERAL CONSUMER
+                        </div>
+                        <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
                             Driver Copy
                         </div>
 
@@ -120,24 +138,24 @@
                         <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
                             <table style="width: 100%; border-collapse: collapse;">
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order ID</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Registration ID</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip No</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip Number</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.trip_no" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Customer Name</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Name</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_name" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Customer Mobile</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Mobile</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_mobile" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Sand Quantity</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.sand_quantity)" /></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -145,22 +163,18 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %H:%M')" /></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Mobile</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_phone" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle No</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.vehicle_no" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Address</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Address</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.address" /></td>
                                 </tr>
                             </table>
@@ -208,35 +222,40 @@
                 <div style="margin-bottom: 0;">
                     <div class="receipt-header">
                         <t t-if="doc.company_id.logo">
-                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Company Logo"/>
+                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
-                        <h3><t t-out="doc.company_id.name" /></h3>
-                        <p>MANAGEMENT SYSTEM</p>
+                        <div style="text-align: left; overflow: hidden;">
+                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT</h3>
+                            <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
+                            <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
+                        </div>
+                        <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
                     </div>
 
-                    <div class="copy-title">Consumer Copy</div>
+                    <div class="copy-title" style="margin-top: 10px;">GENERAL CONSUMER</div>
+                    <div style="text-align: center; font-size: 10px; font-style: italic; margin-bottom: 10px;">Consumer Copy</div>
 
                     <div class="receipt-details">
                         <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Order ID</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Registration ID</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Trip No</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Trip Number</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.trip_no" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Customer Name</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Name</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_name" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Customer Mobile</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Mobile</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_mobile" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Sand Quantity</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.sand_quantity)" /></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -244,22 +263,18 @@
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %H:%M')" /></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Mobile</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_phone" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle No</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.vehicle_no" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Address</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Address</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.address" /></td>
                             </tr>
                         </table>
@@ -275,58 +290,55 @@
                 <div>
                     <div class="receipt-header">
                         <t t-if="doc.company_id.logo">
-                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Company Logo"/>
+                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
-                        <h3><t t-out="doc.company_id.name" /></h3>
-                        <p>MANAGEMENT SYSTEM</p>
+                        <div style="text-align: left; overflow: hidden;">
+                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT</h3>
+                            <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
+                            <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
+                        </div>
+                        <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
                     </div>
 
-                    <div class="copy-title">Driver Copy</div>
+                    <div class="copy-title" style="margin-top: 10px;">GENERAL CONSUMER</div>
+                    <div style="text-align: center; font-size: 10px; font-style: italic; margin-bottom: 10px;">Driver Copy</div>
 
                     <div class="receipt-details">
                         <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Order ID</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Registration ID</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Trip No</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Trip Number</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.trip_no" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Customer Name</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Name</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_name" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Customer Mobile</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Mobile</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_mobile" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Sand Quantity</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.sand_quantity)" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Supply Point</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.sand_supply_point" /></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %H:%M')" /></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Mobile</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_phone" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle No</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.vehicle_no" /></td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Address</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Address</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.address" /></td>
                             </tr>
                         </table>

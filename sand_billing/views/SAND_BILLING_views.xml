@@ -33,53 +33,48 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="receipt_id" readonly="1" />
+                                <field name="receipt_id" readonly="1" invisible="1"/>
+                                <field name="order_id" placeholder="Registration ID"/>
                             </h1>
                         </div>
 
-                        <!-- QR Code and Main Info -->
                         <group>
-                            <group string="Order Information">
-                                <field name="order_id" />
-                                <field name="trip_no" />
-                                <field name="dispatch_id" readonly="1" />
-                                <field name="dispatch_date" />
-                                <field name="registration_date" />
-                            </group>
-                            <group>
-                                <field name="qr_code" widget="image" nolabel="1" options="{'size': [120, 120]}" invisible="state == 'draft'"/>
-                                <field name="company_id" invisible="1" />
-                            </group>
-                        </group>
-
-                        <group>
-                            <group string="Customer Details">
+                            <group string="Consumer Information">
                                 <field name="customer_name" />
                                 <field name="customer_mobile" />
+                                <field name="registration_date" />
+                                <field name="registration_type" />
+                                <field name="registration_qty" />
+                                <field name="registration_address" />
                             </group>
-                            <group string="Sand Information">
-                                <field name="sand_quantity" />
-                                <field name="sand_supply_point" />
-                            </group>
+                            
                         </group>
 
+                        <separator string="Sand Availability"/>
                         <group>
-                            <group string="Driver Details">
-                                <field name="driver_name" />
-                                <field name="driver_phone" />
-                                <field name="vehicle_no" />
-                            </group>
-                            <group string="Construction Info">
+                            <group>
+                                <field name="available_sand_qty" />
+                                <field name="sand_supply_point" />
                                 <field name="construction_name" />
                             </group>
+                            <group>
+                                <field name="eligible_sand_qty" readonly="1" force_save="1"/>
+                            </group>
                         </group>
 
-                        <group string="Address Information">
+                        <separator string="Dispatch Information"/>
+                        <group>
                             <group>
-                                <field name="address" placeholder="Delivery Address..." />
+                                <field name="dispatch_id" />
+                                <field name="trip_no" />
+                                <field name="vehicle_no" />
+                                <field name="driver_name" />
+                                <field name="driver_phone" />
                             </group>
                             <group>
-                                <field name="registration_address" placeholder="Registration Address..." />
+                                <field name="dispatch_qty" />
+                                <field name="dispatch_date" />
+                                <field name="address" />
                             </group>
                         </group>
                     </sheet>

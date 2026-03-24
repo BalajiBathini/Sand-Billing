@@ -13,33 +13,42 @@ class SandBillingReceipt(models.Model):
 
     # Receipt Details
     receipt_id = fields.Char(string='Receipt ID', readonly=True, copy=False)
-    order_id = fields.Char(string='Order ID', required=True)
-    trip_no = fields.Char(string='Trip No', required=True)
+    order_id = fields.Char(string='Registration ID', required=True)
+    trip_no = fields.Char(string='Trip Number', required=True)
 
-    # Customer Details
-    customer_name = fields.Char(string='Customer Name', required=True)
-    customer_mobile = fields.Char(string='Customer Mobile Number', required=True)
+    # Consumer Details
+    customer_name = fields.Char(string='Consumer Name', required=True)
+    customer_mobile = fields.Char(string='Consumer Mobile', required=True)
 
-    # Sand Details
-    sand_quantity = fields.Float(string='Sand Quantity (Tons)', required=True)
-    sand_supply_point = fields.Char(string='Sand Supply Point Name', required=True)
+    # Registration Details
+    registration_date = fields.Datetime(string='Registration Date', required=True, default=fields.Datetime.now)
+    registration_type = fields.Selection([
+        ('general', 'GENERAL SAND CONSUMPTION')
+    ], string='Registration Type', default='general', required=True)
+    registration_qty = fields.Float(string='Registration QTY(in MT)', default=560.0, required=True)
+    registration_address = fields.Text(string='Registration Address', required=True)
 
-    # Date and Time
-    dispatch_date = fields.Datetime(string='Dispatch Date & Time', required=True, default=fields.Datetime.now)
-    registration_date = fields.Datetime(string='Registration Date & Time', required=True, default=fields.Datetime.now)
+    # Sand Calculations
+    available_sand_qty = fields.Float(string='Available Sand QTY(in MT)')
+    eligible_sand_qty = fields.Float(string='Eligible Sand QTY(in MT)', compute='_compute_eligible_sand_qty', store=True)
+
+    # Dispatch Details
+    dispatch_id = fields.Char(string='Dispatch ID', readonly=True, copy=False)
+    vehicle_no = fields.Char(string='Vehicle Number/Type', required=True)
+    dispatch_qty = fields.Float(string='Dispatch QTY(in MT)', required=True)
+    dispatch_date = fields.Datetime(string='Dispatch Date Time', required=True, default=fields.Datetime.now)
+    address = fields.Text(string='Dispatch Address', required=True)
 
     # Driver Details
     driver_name = fields.Char(string='Driver Name', required=True)
-    driver_phone = fields.Char(string='Driver Phone Number', required=True)
-    vehicle_no = fields.Char(string='Vehicle No', required=True)
+    driver_phone = fields.Char(string='Driver Mobile No', required=True)
 
-    # Address Details
-    address = fields.Text(string='Address', required=True)
-    registration_address = fields.Text(string='Registration Address', required=True)
+    # Sand Details (Legacy/Internal)
+    sand_quantity = fields.Float(string='Sand Quantity (Tons)', related='dispatch_qty', readonly=False)
+    sand_supply_point = fields.Char(string='Sand Supply Point Name', required=True)
 
     # Additional Details
     construction_name = fields.Char(string='Construction Name', required=True)
-    dispatch_id = fields.Char(string='Dispatch ID', readonly=True, copy=False)
 
     # Status
     state = fields.Selection(
@@ -59,6 +68,11 @@ class SandBillingReceipt(models.Model):
     # Created date for reference
     created_date = fields.Datetime(string='Created Date', readonly=True, default=fields.Datetime.now)
 
+    @api.depends('registration_qty')
+    def _compute_eligible_sand_qty(self):
+        for record in self:
+            record.eligible_sand_qty = record.registration_qty
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -75,19 +89,17 @@ class SandBillingReceipt(models.Model):
 
             # Generate QR Code
             qr_data = (
-                f"SAND BILLING RECEIPT\n"
-                f"Receipt ID: {record.receipt_id}\n"
-                f"Order ID: {record.order_id}\n"
-                f"Trip No: {record.trip_no}\n"
-                f"Customer: {record.customer_name}\n"
+                f"GENERAL CONSUMER\n"
+                f"Registration ID: {record.order_id}\n"
+                f"Trip Number: {record.trip_no}\n"
+                f"Consumer: {record.customer_name}\n"
                 f"Mobile: {record.customer_mobile}\n"
-                f"Quantity: {record.sand_quantity} Tons\n"
+                f"Quantity: {record.dispatch_qty} MT\n"
                 f"Supply Point: {record.sand_supply_point}\n"
                 f"Driver: {record.driver_name}\n"
                 f"Vehicle: {record.vehicle_no}\n"
-                f"Address: {record.address.replace('\n', ' ')}\n"
                 f"Dispatch ID: {record.dispatch_id}\n"
-                f"Dispatch Date: {record.dispatch_date}"
+                f"Dispatch Date: {record.dispatch_date.strftime('%d-%m-%Y %I:%M %p')}"
             ).strip()
             qr = qrcode.QRCode(
                 version=1,

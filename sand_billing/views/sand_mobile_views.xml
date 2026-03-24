@@ -139,11 +139,13 @@
                         }
 
                         .header-text p:nth-of-type(1) {
-                            font-size: 13px;
+                            font-size: 14px;
+                            color: #d32f2f;
                         }
 
                         .header-text p:nth-of-type(2) {
-                            font-size: 10px;
+                            font-size: 11px;
+                            color: #1976d2;
                         }
 
                         .banner {
@@ -302,17 +304,20 @@
                         <div id="content">
                             <!-- Header -->
                             <div class="header">
+                                <t t-if="res_company.logo">
+                                    <img t-attf-src="data:image/png;base64,{{res_company.logo}}" class="logo-img" alt="Logo"/>
+                                </t>
                                 <div class="header-text">
-                                    <h1>Sand Management System</h1>
-                                    <p>Billing Receipt Viewer</p>
+                                    <h1>AP SAND MANAGEMENT</h1>
+                                    <p>Department of Mines &amp; Geology</p>
+                                    <p>Government of Andhra Pradesh</p>
                                 </div>
                             </div>
 
                             <!-- Banner -->
                             <div class="banner">
-                                Scan QR Code<br/>
-                                or<br/>
-                                Enter Receipt ID
+                                Free Sand Information Details<br/>
+
                             </div>
 
                             <!-- Search Section -->
@@ -322,11 +327,11 @@
                                 </div>
                                 <div class="error-message" id="errorMsg"></div>
 
-                                <input type="text" id="receiptInput" class="search-input" placeholder="Enter Receipt ID..."/>
+                                <input type="text" id="receiptInput" class="search-input" placeholder="Enter Registration ID..."/>
 
                                 <div class="btn-row">
                                     <button class="btn-common btn-scan" onclick="searchReceipt()">
-                                        <i class="fas fa-search"></i> Search
+                                        <i class="fas fa-search"></i> Get->
                                     </button>
                                     <button class="btn-common btn-clear" onclick="clearInput()">
                                         <i class="fas fa-times"></i> Clear
@@ -339,47 +344,36 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <i class="fas fa-file-invoice"></i>
-                                        SAND BILLING RECEIPT
+                                        GENERAL CONSUMER
                                     </div>
 
                                     <div class="card-body">
-                                        <!-- Section 1: Order Details -->
-                                        <div class="data-row"><span class="label">Receipt ID</span><span class="sep">:</span><span class="val" id="receiptId">-</span></div>
-                                        <div class="data-row"><span class="label">Order ID</span><span class="sep">:</span><span class="val" id="orderId">-</span></div>
-                                        <div class="data-row"><span class="label">Trip No</span><span class="sep">:</span><span class="val" id="tripNo">-</span></div>
-                                        <div class="data-row"><span class="label">Dispatch ID</span><span class="sep">:</span><span class="val" id="dispatchId">-</span></div>
-
-                                        <div class="divider"></div>
-
-                                        <!-- Section 2: Customer Details -->
-                                        <div class="data-row"><span class="label">Customer Name</span><span class="sep">:</span><span class="val" id="customerName">-</span></div>
-                                        <div class="data-row"><span class="label">Customer Mobile</span><span class="sep">:</span><span class="val" id="customerMobile">-</span></div>
-                                        <div class="data-row"><span class="label">Construction Name</span><span class="sep">:</span><span class="val" id="constructionName">-</span></div>
-
-                                        <div class="divider"></div>
-
-                                        <!-- Section 3: Sand Information -->
-                                        <div class="data-row"><span class="label">Sand Quantity (MT)</span><span class="sep">:</span><span class="val" id="sandQuantity">-</span></div>
-                                        <div class="data-row"><span class="label">Supply Point</span><span class="sep">:</span><span class="val" id="supplyPoint">-</span></div>
-
-                                        <div class="divider"></div>
-
-                                        <!-- Section 4: Dispatch Information -->
-                                        <div class="data-row"><span class="label">Dispatch Date &amp; Time</span><span class="sep">:</span><span class="val" id="dispatchDate">-</span></div>
+                                        <!-- Section 1: Registration Details -->
+                                        <div class="data-row"><span class="label">Registration ID</span><span class="sep">:</span><span class="val" id="orderId">-</span></div>
+                                        <div class="data-row"><span class="label">Consumer name</span><span class="sep">:</span><span class="val" id="customerName">-</span></div>
+                                        <div class="data-row"><span class="label">Consumer Mobile</span><span class="sep">:</span><span class="val" id="customerMobile">-</span></div>
                                         <div class="data-row"><span class="label">Registration Date</span><span class="sep">:</span><span class="val" id="registrationDate">-</span></div>
-
-                                        <div class="divider"></div>
-
-                                        <!-- Section 5: Driver Details -->
-                                        <div class="data-row"><span class="label">Driver Name</span><span class="sep">:</span><span class="val" id="driverName">-</span></div>
-                                        <div class="data-row"><span class="label">Driver Mobile</span><span class="sep">:</span><span class="val" id="driverMobile">-</span></div>
-                                        <div class="data-row"><span class="label">Vehicle No</span><span class="sep">:</span><span class="val" id="vehicleNo">-</span></div>
-
-                                        <div class="divider"></div>
-
-                                        <!-- Section 6: Address Information -->
-                                        <div class="data-row"><span class="label">Delivery Address</span><span class="sep">:</span><span class="val" id="address">-</span></div>
+                                        <div class="data-row"><span class="label">Registration Type</span><span class="sep">:</span><span class="val" id="registrationType">-</span></div>
+                                        <div class="data-row"><span class="label">Registration QTY(in MT)</span><span class="sep">:</span><span class="val" id="registrationQty">-</span></div>
                                         <div class="data-row"><span class="label">Registration Address</span><span class="sep">:</span><span class="val" id="regAddress">-</span></div>
+
+                                        <div class="divider"></div>
+
+                                        <!-- Section 2: Sand Availability -->
+                                        <div class="data-row"><span class="label">Available Sand QTY(in MT)</span><span class="sep">:</span><span class="val" id="availableQty">-</span></div>
+                                        <div class="data-row"><span class="label">Eligible Sandd QTY(in MT)</span><span class="sep">:</span><span class="val" id="eligibleQty">-</span></div>
+
+                                        <div class="divider"></div>
+
+
+                                        <!-- Section 3: Dispatch Details -->
+                                        <div class="data-row"><span class="label">Dispatch ID</span><span class="sep">:</span><span class="val" id="dispatchId">-</span></div>
+                                        <div class="data-row"><span class="label">Trip Number</span><span class="sep">:</span><span class="val" id="tripNo">-</span></div>
+                                        <div class="data-row"><span class="label">Vehicle Number/Type</span><span class="sep">:</span><span class="val" id="vehicleNo">-</span></div>
+                                        <div class="data-row"><span class="label">Driver Name/Mobile No</span><span class="sep">:</span><span class="val" id="driverInfo">-</span></div>
+                                        <div class="data-row"><span class="label">Dispatch QTY(in MT)</span><span class="sep">:</span><span class="val" id="dispatchQty">-</span></div>
+                                        <div class="data-row"><span class="label">Dispatch Date Time</span><span class="sep">:</span><span class="val" id="dispatchDate">-</span></div>
+                                        <div class="data-row"><span class="label">Dispatch Address</span><span class="sep">:</span><span class="val" id="address">-</span></div>
 
                                         <div class="divider"></div>
 
@@ -460,22 +454,24 @@
 
                         // Display receipt data
                         function displayReceipt(data) {
-                            setText('receiptId', data.receipt_id);
                             setText('orderId', data.order_id);
-                            setText('tripNo', data.trip_no);
-                            setText('dispatchId', data.dispatch_id);
                             setText('customerName', data.customer_name);
                             setText('customerMobile', data.customer_mobile);
-                            setText('constructionName', data.construction_name);
-                            setText('sandQuantity', data.sand_quantity ? data.sand_quantity.toFixed(1) + ' MT' : '-');
-                            setText('supplyPoint', data.sand_supply_point);
-                            setText('dispatchDate', formatDate(data.dispatch_date));
                             setText('registrationDate', formatDate(data.registration_date));
-                            setText('driverName', data.driver_name);
-                            setText('driverMobile', data.driver_phone);
-                            setText('vehicleNo', data.vehicle_no);
-                            setText('address', data.address);
+                            setText('registrationType', data.registration_type === 'general' ? 'GENERAL SAND CONSUMPTION' : data.registration_type);
+                            setText('registrationQty', data.registration_qty ? data.registration_qty.toFixed(1) + ' MT' : '-');
                             setText('regAddress', data.registration_address);
+                            
+                            setText('availableQty', data.available_sand_qty ? data.available_sand_qty.toFixed(1) + ' MT' : '-');
+                            setText('eligibleQty', data.eligible_sand_qty ? data.eligible_sand_qty.toFixed(1) + ' MT' : '-');
+
+                            setText('dispatchId', data.dispatch_id);
+                            setText('tripNo', data.trip_no);
+                            setText('vehicleNo', data.vehicle_no);
+                            setText('driverInfo', (data.driver_name || '-') + ' / ' + (data.driver_phone || '-'));
+                            setText('dispatchQty', data.dispatch_qty ? data.dispatch_qty.toFixed(1) + ' MT' : '-');
+                            setText('dispatchDate', formatDate(data.dispatch_date));
+                            setText('address', data.address);
 
                             const statusEl = document.getElementById('status');
                             statusEl.innerText = (data.state || 'draft').toUpperCase();
@@ -491,7 +487,11 @@
                         function formatDate(dateStr) {
                             if (!dateStr) return '-';
                             const date = new Date(dateStr);
-                            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                            const options = { 
+                                day: '2-digit', month: '2-digit', year: 'numeric',
+                                hour: '2-digit', minute: '2-digit', hour12: true 
+                            };
+                            return date.toLocaleString('en-IN', options);
                         }
 
                         function searchReceipt() {
