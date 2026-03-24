@@ -428,28 +428,38 @@
                             }
                         };
 
-                        // Fetch receipt from Odoo
+                        // Fetch receipt from Odoo via dedicated API
                         function fetchReceipt(receiptId) {
                             document.getElementById('loading').style.display = 'block';
                             document.getElementById('content').style.display = 'none';
 
-                            odooRpc.call('sand.billing.receipt', 'search_read', [[['receipt_id', '=', receiptId]]], {})
-                                .then(records => {
-                                    if (records && records.length > 0) {
-                                        displayReceipt(records[0]);
-                                        showSuccess('Receipt loaded successfully!');
-                                    } else {
-                                        showError('Receipt not found. Please check the ID.');
-                                    }
-                                    document.getElementById('loading').style.display = 'none';
-                                    document.getElementById('content').style.display = 'block';
+                            fetch('/sand/api/receipt/' + encodeURIComponent(receiptId), {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    jsonrpc: '2.0',
+                                    params: {}
                                 })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    showError('Failed to load receipt. Please try again.');
-                                    document.getElementById('loading').style.display = 'none';
-                                    document.getElementById('content').style.display = 'block';
-                                });
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.result && result.result.status === 'success') {
+                                    displayReceipt(result.result.data);
+                                    showSuccess('Receipt loaded successfully!');
+                                } else {
+                                    showError(result.result?.message || 'Receipt not found. Please check the ID.');
+                                }
+                                document.getElementById('loading').style.display = 'none';
+                                document.getElementById('content').style.display = 'block';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                showError('Failed to load receipt. Please try again.');
+                                document.getElementById('loading').style.display = 'none';
+                                document.getElementById('content').style.display = 'block';
+                            });
                         }
 
                         // Display receipt data
@@ -459,17 +469,17 @@
                             setText('customerMobile', data.customer_mobile);
                             setText('registrationDate', formatDate(data.registration_date));
                             setText('registrationType', data.registration_type === 'general' ? 'GENERAL SAND CONSUMPTION' : data.registration_type);
-                            setText('registrationQty', data.registration_qty ? data.registration_qty.toFixed(1) + ' MT' : '-');
+                            setText('registrationQty', data.registration_qty ? parseFloat(data.registration_qty).toFixed(1) + ' MT' : '-');
                             setText('regAddress', data.registration_address);
                             
-                            setText('availableQty', data.available_sand_qty ? data.available_sand_qty.toFixed(1) + ' MT' : '-');
-                            setText('eligibleQty', data.eligible_sand_qty ? data.eligible_sand_qty.toFixed(1) + ' MT' : '-');
+                            setText('availableQty', data.available_sand_qty ? parseFloat(data.available_sand_qty).toFixed(1) + ' MT' : '-');
+                            setText('eligibleQty', data.eligible_sand_qty ? parseFloat(data.eligible_sand_qty).toFixed(1) + ' MT' : '-');
 
                             setText('dispatchId', data.dispatch_id);
                             setText('tripNo', data.trip_no);
                             setText('vehicleNo', data.vehicle_no);
                             setText('driverInfo', (data.driver_name || '-') + ' / ' + (data.driver_phone || '-'));
-                            setText('dispatchQty', data.dispatch_qty ? data.dispatch_qty.toFixed(1) + ' MT' : '-');
+                            setText('dispatchQty', data.sand_quantity ? parseFloat(data.sand_quantity).toFixed(1) + ' MT' : '-');
                             setText('dispatchDate', formatDate(data.dispatch_date));
                             setText('address', data.address);
 
