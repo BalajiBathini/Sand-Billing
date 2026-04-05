@@ -1,5 +1,4 @@
 from odoo import models, fields, api
-from datetime import datetime
 import qrcode
 import io
 import base64
@@ -10,67 +9,22 @@ class SandBillingReceiptMobile(models.Model):
     _inherit = 'sand.billing.receipt'
 
     # Add a field to store mobile view URL
-    mobile_view_url = fields.Char(string='Mobile View URL', compute='_compute_mobile_view_url', store=False)
-    mobile_qr_code = fields.Image(string='Mobile QR Code', readonly=True, help='QR code for mobile view')
+    mobile_view_url = fields.Char(string='Mobile View URL', compute='_compute_mobile_view_url')
+    # Use the main qr_code field for mobile as well
+    mobile_qr_code = fields.Image(related='qr_code', string='Mobile QR Code', readonly=True)
 
     @api.depends('receipt_id')
     def _compute_mobile_view_url(self):
         """Generate shareable mobile view URL"""
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url', 'http://localhost:8069')
+        if base_url.endswith('/'):
+            base_url = base_url[:-1]
+            
         for record in self:
             if record.receipt_id:
-                # Get the base URL from configuration
-                base_url = self.env['ir.config_parameter'].sudo().get_param(
-                    'web.base.url',
-                    'http://localhost:8069'
-                )
                 record.mobile_view_url = f"{base_url}/sand/mobile/view?receipt_id={record.receipt_id}"
             else:
                 record.mobile_view_url = ''
-
-    def generate_mobile_qr_code(self):
-        """
-        Generate QR code for mobile view URL
-        This allows sharing the receipt via QR code for mobile viewing
-        """
-        for record in self:
-            if not record.receipt_id:
-                continue
-
-            # Get the mobile view URL
-            base_url = self.env['ir.config_parameter'].sudo().get_param(
-                'web.base.url',
-                'http://localhost:8069'
-            )
-            mobile_url = f"{base_url}/sand/mobile/view?receipt_id={record.receipt_id}"
-
-            # Generate QR code
-            qr = qrcode.QRCode(
-                version=1,
-                error_correction=qrcode.constants.ERROR_CORRECT_H,
-                box_size=10,
-                border=2,
-            )
-            qr.add_data(mobile_url)
-            qr.make(fit=True)
-
-            img = qr.make_image(fill_color="black", back_color="white")
-
-            # Convert to base64
-            buffer = io.BytesIO()
-            img.save(buffer, format='PNG')
-            qr_image = base64.b64encode(buffer.getvalue())
-
-            record.write({
-                'mobile_qr_code': qr_image
-            })
-
-    def action_confirm(self):
-        """Override confirm to also generate mobile QR code"""
-        # Call parent confirm method
-        super().action_confirm()
-
-        # Generate mobile QR code
-        self.generate_mobile_qr_code()
 
     def action_get_mobile_view_url(self):
         """Return mobile view URL for sharing"""
@@ -131,7 +85,8 @@ class SandReceiptShareWizard(models.TransientModel):
         """Get QR code from receipt"""
         for record in self:
             if record.receipt_id:
-                record.qr_code_image = record.receipt_id.mobile_qr_code
+                # Use the unified qr_code field
+                record.qr_code_image = record.receipt_id.qr_code
             else:
                 record.qr_code_image = False
 
@@ -152,26 +107,31 @@ class SandReceiptShareWizard(models.TransientModel):
         """Send mobile receipt link via email"""
         self.ensure_one()
 
-        # Get the customer email from receipt
+        # Get the customer info from receipt
         receipt = self.receipt_id
 
         # Create email values
         email_values = {
             'subject': f'Sand Billing Receipt - {receipt.receipt_id}',
             'body_html': f"""
-            <p>Dear {receipt.customer_name},</p>
-            <p>Your sand billing receipt is ready. You can view it using the link below:</p>
-            <p><a href="{self.mobile_url}">View Receipt</a></p>
-            <p>Or scan the QR code attached to this email.</p>
-            <p>Receipt Details:</p>
-            <ul>
-                <li>Receipt ID: {receipt.receipt_id}</li>
-                <li>Order ID: {receipt.order_id}</li>
-                <li>Sand Quantity: {receipt.sand_quantity} MT</li>
-            </ul>
-            <p>Thank you!</p>
+            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;">
+                <h2 style="color: #009e4f;">AP SAND MANAGEMENT</h2>
+                <p>Dear {receipt.customer_name},</p>
+                <p>Your sand billing receipt is ready. You can view it using the link below:</p>
+                <p style="text-align: center; margin: 30px 0;">
+                    <a href="{self.mobile_url}" style="background-color: #ff9933; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">View Receipt</a>
+                </p>
+                <p>Receipt Details:</p>
+                <ul>
+                    <li><strong>Receipt ID:</strong> {receipt.receipt_id}</li>
+                    <li><strong>Registration ID:</strong> {receipt.order_id}</li>
+                    <li><strong>Dispatch Qty:</strong> {receipt.dispatch_qty} MT</li>
+                    <li><strong>Dispatch Date:</strong> {receipt._get_ist_time_str('dispatch_date')}</li>
+                </ul>
+                <p>Thank you!</p>
+            </div>
             """,
-            'email_to': receipt.customer_mobile,  # You might want to link to a res.partner
+            'email_to': receipt.customer_mobile,  # Note: Should ideally be an email address
         }
 
         # Create email

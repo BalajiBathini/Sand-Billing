@@ -80,7 +80,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
@@ -163,7 +163,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
@@ -263,7 +263,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
@@ -327,7 +327,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.dispatch_date.strftime('%d-%m-%Y %I:%M %p')" /></td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>

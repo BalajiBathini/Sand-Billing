@@ -23,7 +23,7 @@ class SandMobileViewController(http.Controller):
             }
         )
 
-    @http.route('/sand/api/receipt/<receipt_id>', type='json', auth='public')
+    @http.route('/sand/api/receipt/<path:receipt_id>', type='json', auth='public', csrf=False)
     def get_receipt_data(self, receipt_id, **kwargs):
         """
         API endpoint to fetch receipt data for mobile view
@@ -52,8 +52,8 @@ class SandMobileViewController(http.Controller):
                     'construction_name': receipt.construction_name,
                     'sand_quantity': receipt.sand_quantity,
                     'sand_supply_point': receipt.sand_supply_point,
-                    'dispatch_date': receipt.dispatch_date.isoformat() if receipt.dispatch_date else None,
-                    'registration_date': receipt.registration_date.isoformat() if receipt.registration_date else None,
+                    'dispatch_date': receipt._get_ist_time_str('dispatch_date'),
+                    'registration_date': receipt._get_ist_time_str('registration_date'),
                     'registration_type': receipt.registration_type,
                     'registration_qty': receipt.registration_qty,
                     'registration_address': receipt.registration_address,

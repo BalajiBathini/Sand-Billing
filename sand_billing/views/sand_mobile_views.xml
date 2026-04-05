@@ -467,7 +467,7 @@
                             setText('orderId', data.order_id);
                             setText('customerName', data.customer_name);
                             setText('customerMobile', data.customer_mobile);
-                            setText('registrationDate', formatDate(data.registration_date));
+                            setText('registrationDate', data.registration_date);
                             setText('registrationType', data.registration_type === 'general' ? 'GENERAL SAND CONSUMPTION' : data.registration_type);
                             setText('registrationQty', data.registration_qty ? parseFloat(data.registration_qty).toFixed(1) + ' MT' : '-');
                             setText('regAddress', data.registration_address);
@@ -480,7 +480,7 @@
                             setText('vehicleNo', data.vehicle_no);
                             setText('driverInfo', (data.driver_name || '-') + ' / ' + (data.driver_phone || '-'));
                             setText('dispatchQty', data.sand_quantity ? parseFloat(data.sand_quantity).toFixed(1) + ' MT' : '-');
-                            setText('dispatchDate', formatDate(data.dispatch_date));
+                            setText('dispatchDate', data.dispatch_date);
                             setText('address', data.address);
 
                             const statusEl = document.getElementById('status');
@@ -495,13 +495,7 @@
                         }
 
                         function formatDate(dateStr) {
-                            if (!dateStr) return '-';
-                            const date = new Date(dateStr);
-                            const options = { 
-                                day: '2-digit', month: '2-digit', year: 'numeric',
-                                hour: '2-digit', minute: '2-digit', hour12: true 
-                            };
-                            return date.toLocaleString('en-IN', options);
+                            return dateStr || '-';
                         }
 
                         function searchReceipt() {

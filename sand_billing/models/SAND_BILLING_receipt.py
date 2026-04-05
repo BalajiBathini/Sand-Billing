@@ -3,6 +3,7 @@ from datetime import datetime
 import qrcode
 import io
 import base64
+import pytz
 
 
 class SandBillingReceipt(models.Model):
@@ -68,6 +69,23 @@ class SandBillingReceipt(models.Model):
     # Created date for reference
     created_date = fields.Datetime(string='Created Date', readonly=True, default=fields.Datetime.now)
 
+    def _get_ist_time_str(self, field_name):
+        """Helper to return IST formatted string (12-hour) for a datetime field"""
+        self.ensure_one()
+        dt_value = getattr(self, field_name)
+        if not dt_value:
+            return '-'
+        
+        # Odoo datetimes are stored in UTC
+        if not dt_value.tzinfo:
+            dt_value = pytz.utc.localize(dt_value)
+        
+        # Convert to Asia/Kolkata
+        ist_tz = pytz.timezone('Asia/Kolkata')
+        ist_dt = dt_value.astimezone(ist_tz)
+        
+        return ist_dt.strftime('%d-%m-%Y %I:%M %p')
+
     @api.depends('registration_qty')
     def _compute_eligible_sand_qty(self):
         for record in self:
@@ -87,20 +105,14 @@ class SandBillingReceipt(models.Model):
             if not record.dispatch_id:
                 record.dispatch_id = self.env['ir.sequence'].next_by_code('sand.dispatch.id') or 'DISP/'
 
-            # Generate QR Code
-            qr_data = (
-                f"GENERAL CONSUMER\n"
-                f"Registration ID: {record.order_id}\n"
-                f"Trip Number: {record.trip_no}\n"
-                f"Consumer: {record.customer_name}\n"
-                f"Mobile: {record.customer_mobile}\n"
-                f"Quantity: {record.dispatch_qty} MT\n"
-                f"Supply Point: {record.sand_supply_point}\n"
-                f"Driver: {record.driver_name}\n"
-                f"Vehicle: {record.vehicle_no}\n"
-                f"Dispatch ID: {record.dispatch_id}\n"
-                f"Dispatch Date: {record.dispatch_date.strftime('%d-%m-%Y %I:%M %p')}"
-            ).strip()
+            # Generate QR Code URL
+            base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url', 'http://localhost:8069')
+            # Ensure URL doesn't have trailing slash
+            if base_url.endswith('/'):
+                base_url = base_url[:-1]
+            
+            qr_data = f"{base_url}/sand/mobile/view?receipt_id={record.receipt_id}"
+            
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -124,6 +136,9 @@ class SandBillingReceipt(models.Model):
 
     def action_print_receipt(self):
         """Generate thermal receipt"""
+        for record in self:
+            if record.state == 'confirmed':
+                record.state = 'printed'
         return self.env.ref('sand_billing.action_sand_receipt_report').report_action(self)
 
     def action_reset_to_draft(self):
