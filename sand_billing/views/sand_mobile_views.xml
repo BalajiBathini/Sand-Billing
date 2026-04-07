@@ -308,7 +308,7 @@
                                     <img t-attf-src="data:image/png;base64,{{res_company.logo}}" class="logo-img" alt="Logo"/>
                                 </t>
                                 <div class="header-text">
-                                    <h1>AP SAND MANAGEMENT</h1>
+                                    <h1>AP SAND MANAGEMENT SYSTEM</h1>
                                     <p>Department of Mines &amp; Geology</p>
                                     <p>Government of Andhra Pradesh</p>
                                 </div>
@@ -316,7 +316,7 @@
 
                             <!-- Banner -->
                             <div class="banner">
-                                Free Sand Information Details<br/>
+                                Free Sand <br/>Information<br/> Details<br/>
 
                             </div>
 
@@ -343,7 +343,7 @@
                             <div class="card-container" id="cardContainer">
                                 <div class="card">
                                     <div class="card-header">
-                                        <i class="fas fa-file-invoice"></i>
+                                        <i class="fas fa-shopping-cart"></i>
                                         GENERAL CONSUMER
                                     </div>
 
@@ -375,17 +375,17 @@
                                         <div class="data-row"><span class="label">Dispatch Date Time</span><span class="sep">:</span><span class="val" id="dispatchDate">-</span></div>
                                         <div class="data-row"><span class="label">Dispatch Address</span><span class="sep">:</span><span class="val" id="address">-</span></div>
 
-                                        <div class="divider"></div>
+<!--                                        <div class="divider"></div>-->
 
-                                        <!-- Status -->
-                                        <div class="data-row"><span class="label">Status</span><span class="sep">:</span><span class="val" id="status" style="background-color: #d4edda; padding: 4px 8px; border-radius: 4px; font-weight: bold;">-</span></div>
+<!--                                        &lt;!&ndash; Status &ndash;&gt;-->
+<!--                                        <div class="data-row"><span class="label">Status</span><span class="sep">:</span><span class="val" id="status" style="background-color: #d4edda; padding: 4px 8px; border-radius: 4px; font-weight: bold;">-</span></div>-->
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Footer -->
                             <div class="footer">
-                                Copyright © 2024 Sand Billing System.<br/>
+                                Copyright © 2024 AP Sand Management &amp; Monitoring System.<br/>
                                 All Rights Reserved
                             </div>
                         </div>

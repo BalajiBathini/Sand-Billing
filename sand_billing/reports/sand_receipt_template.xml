@@ -35,7 +35,7 @@
                                         </t>
                                     </td>
                                     <td style="vertical-align: middle; padding-left: 2mm;">
-                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT</div>
+                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
                                         <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
                                         <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
                                     </td>
@@ -118,7 +118,7 @@
                                         </t>
                                     </td>
                                     <td style="vertical-align: middle; padding-left: 2mm;">
-                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT</div>
+                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
                                         <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
                                         <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
                                     </td>
@@ -225,7 +225,7 @@
                             <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
                         <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT</h3>
+                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT SYSTEM</h3>
                             <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
                             <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
                         </div>
@@ -293,7 +293,7 @@
                             <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
                         <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT</h3>
+                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT SYSTEM</h3>
                             <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
                             <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
                         </div>
