@@ -2,31 +2,31 @@
 
 import { WebClient } from "@web/webclient/webclient";
 import { patch } from "@web/core/utils/patch";
-import { useService } from "@web/core/utils/hooks";
+import { useService, onMounted } from "@web/core/utils/hooks";
 
 patch(WebClient.prototype, {
     setup() {
         super.setup();
 
-        const user = useService("user");   // ✅ correct service
+        const user = useService("user"); // OK to declare
 
-        const companyId = user.currentCompany?.id;  // ✅ safe access
+        onMounted(() => {
+            const companyId = user.currentCompany?.id;
 
-        if (!companyId) {
-            return; // prevent crash
-        }
+            if (!companyId) return;
 
-        const favicon = `/web/image/res.company/${companyId}/favicon`;
+            const favicon = `/web/image/res.company/${companyId}/favicon`;
 
-        const icons = document.querySelectorAll("link[rel*='icon']");
-        const msIcon = document.querySelector("meta[name='msapplication-TileImage']");
+            const icons = document.querySelectorAll("link[rel*='icon']");
+            const msIcon = document.querySelector("meta[name='msapplication-TileImage']");
 
-        for (const icon of icons) {
-            icon.href = favicon;
-        }
+            for (const icon of icons) {
+                icon.href = favicon;
+            }
 
-        if (msIcon) {
-            msIcon.content = favicon;
-        }
+            if (msIcon) {
+                msIcon.content = favicon;
+            }
+        });
     },
 });
