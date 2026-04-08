@@ -57,6 +57,9 @@
                             border-color: #ff9933;
                             background-color: #fff;
                         }
+                        .o_body_html .header, .o_body_pdf.o_css_margins .header {
+    padding-top: 3mm;
+}
 
                         .btn-row {
                             display: flex;
