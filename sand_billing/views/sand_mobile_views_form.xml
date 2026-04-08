@@ -8,12 +8,11 @@
             <field name="arch" type="xml">
                 <header position="replace">
                     <header>
-                        <button name="action_confirm" type="object" string="Confirm &amp; Generate QR" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" invisible="state != 'draft'"/>
                         <button name="action_print_receipt" type="object" string="Print Receipt" class="oe_highlight" />
-                        <button name="action_get_mobile_view_url" type="object" string="📱 Mobile View" class="oe_link" invisible="state == 'draft'"/>
-                        <button name="action_share_mobile_receipt" type="object" string="📤 Share Receipt" class="oe_link" invisible="state == 'draft'"/>
+                        <button name="action_get_mobile_view_url" type="object" string="📱 Mobile View" invisible="state == 'draft'"/>
+                        <button name="action_share_mobile_receipt" type="object" string="📤 Share Receipt" invisible="state == 'draft'"/>
                         <button name="action_reset_to_draft" type="object" string="Reset to Draft" />
-                        <field name="state" widget="statusbar" />
                     </header>
                 </header>
                 <xpath expr="//group[1]" position="after">

@@ -55,7 +55,7 @@
                         <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
                             <table style="width: 100%; border-collapse: collapse;">
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Registration ID</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order Id</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
                                 </tr>
                                 <tr>
@@ -138,7 +138,7 @@
                         <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
                             <table style="width: 100%; border-collapse: collapse;">
                                 <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Registration ID</strong></td>
+                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order Id</strong></td>
                                     <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
                                 </tr>
                                 <tr>
@@ -238,7 +238,7 @@
                     <div class="receipt-details">
                         <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Registration ID</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Order Id</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
                             </tr>
                             <tr>
@@ -306,7 +306,7 @@
                     <div class="receipt-details">
                         <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Registration ID</strong></td>
+                                <td style="padding: 3px; font-weight: bold;"><strong>Order Id</strong></td>
                                 <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
                             </tr>
                             <tr>

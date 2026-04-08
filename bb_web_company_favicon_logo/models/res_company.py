@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools, modules
-from odoo.modules.module import get_resource_path
+from odoo.tools.misc import file_path
 import base64
 from PIL import Image
 from random import randrange
@@ -10,7 +10,7 @@ class ResCompany(models.Model):
     
     @api.model
     def _get_default_favicon(self, original=False):
-        img_path = get_resource_path('web', 'static/img/favicon.ico')
+        img_path = file_path('web/static/img/favicon.ico')
         with tools.file_open(img_path, 'rb') as f:
             if original:
                 return base64.b64encode(f.read())

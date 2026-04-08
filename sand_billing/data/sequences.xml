@@ -10,12 +10,12 @@
             <field name="number_next">1</field>
         </record>
 
-        <!-- Dispatch ID Sequence -->
-        <record id="seq_sand_dispatch_id" model="ir.sequence">
-            <field name="name">Sand Dispatch ID Sequence</field>
-            <field name="code">sand.dispatch.id</field>
-            <field name="prefix">DISP/%(year)s%(month)s/</field>
-            <field name="padding">6</field>
+        <!-- Dispatch ID Number Sequence (8 digits) -->
+        <record id="seq_sand_dispatch_id_number" model="ir.sequence">
+            <field name="name">Sand Dispatch ID Number Sequence</field>
+            <field name="code">sand.dispatch.id.number</field>
+            <field name="prefix"></field>
+            <field name="padding">8</field>
             <field name="number_next">1</field>
         </record>
     </data>

@@ -15,7 +15,7 @@ class SandBillingReceipt(models.Model):
     # Receipt Details
     receipt_id = fields.Char(string='Receipt ID', readonly=True, copy=False)
     order_id = fields.Char(string='Registration ID', required=True)
-    trip_no = fields.Char(string='Trip Number', required=True)
+    trip_no = fields.Char(string='Trip Number',default='1', required=True)
 
     # Consumer Details
     customer_name = fields.Char(string='Consumer Name', required=True)
@@ -46,7 +46,7 @@ class SandBillingReceipt(models.Model):
 
     # Sand Details (Legacy/Internal)
     sand_quantity = fields.Float(string='Sand Quantity (Tons)', related='dispatch_qty', readonly=False)
-    sand_supply_point = fields.Char(string='Sand Supply Point Name', required=True)
+    sand_supply_point = fields.Char(string='Sand Supply Point Name',default='Sri G.Chandramohan Naidu', required=True)
 
     # Additional Details
     construction_name = fields.Char(string='Construction Name', required=True)
@@ -101,9 +101,13 @@ class SandBillingReceipt(models.Model):
     def action_confirm(self):
         """Confirm receipt and generate QR code"""
         for record in self:
-            # Generate Dispatch ID
+            # Generate Dispatch ID: GCTR + Timestamp(IST) + C1 + 8-digit Sequence
             if not record.dispatch_id:
-                record.dispatch_id = self.env['ir.sequence'].next_by_code('sand.dispatch.id') or 'DISP/'
+                ist_tz = pytz.timezone('Asia/Kolkata')
+                now = datetime.now(pytz.utc).astimezone(ist_tz)
+                timestamp = now.strftime('%Y%m%d%H%M%S')
+                seq_num = self.env['ir.sequence'].next_by_code('sand.dispatch.id.number') or '186566' # Fallback for demo
+                record.dispatch_id = f"GCTR{timestamp}C1{seq_num}"
 
             # Generate QR Code URL
             base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url', 'http://localhost:8069')

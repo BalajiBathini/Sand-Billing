@@ -23,21 +23,27 @@ class SandMobileViewController(http.Controller):
             }
         )
 
-    @http.route('/sand/api/receipt/<path:receipt_id>', type='json', auth='public', csrf=False)
+    @http.route('/sand/api/receipt/<path:receipt_id>', type='http', auth='public', csrf=False, website=True)
     def get_receipt_data(self, receipt_id, **kwargs):
         """
         API endpoint to fetch receipt data for mobile view
-
         Returns JSON with all receipt details
         """
+        import json
         try:
+            # Clean receipt_id (handle potential encoding/slashes)
+            search_id = receipt_id.strip()
+            
             receipt = request.env['sand.billing.receipt'].sudo().search(
-                [('receipt_id', '=', receipt_id)],
+                [('receipt_id', '=', search_id)],
                 limit=1
             )
 
             if not receipt:
-                return {'status': 'error', 'message': 'Receipt not found'}
+                return request.make_response(
+                    json.dumps({'status': 'error', 'message': f'Receipt ID "{search_id}" not found.'}),
+                    headers=[('Content-Type', 'application/json')]
+                )
 
             # Format the response
             response_data = {
@@ -46,7 +52,7 @@ class SandMobileViewController(http.Controller):
                     'receipt_id': receipt.receipt_id,
                     'order_id': receipt.order_id,
                     'trip_no': receipt.trip_no,
-                    'dispatch_id': receipt.dispatch_id,
+                    'dispatch_id': receipt.dispatch_id or '-',
                     'customer_name': receipt.customer_name,
                     'customer_mobile': receipt.customer_mobile,
                     'construction_name': receipt.construction_name,
@@ -64,14 +70,16 @@ class SandMobileViewController(http.Controller):
                     'vehicle_no': receipt.vehicle_no,
                     'address': receipt.address,
                     'state': receipt.state,
-                    'qr_code': receipt.qr_code,
                 }
             }
 
-            return response_data
+            return request.make_response(
+                json.dumps(response_data),
+                headers=[('Content-Type', 'application/json')]
+            )
 
         except Exception as e:
-            return {
-                'status': 'error',
-                'message': str(e)
-            }
+            return request.make_response(
+                json.dumps({'status': 'error', 'message': str(e)}),
+                headers=[('Content-Type', 'application/json')]
+            )
