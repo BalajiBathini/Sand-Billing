@@ -40,13 +40,13 @@ class Binary(http.Controller):
                 company = int(kw['company']) if kw and kw.get('company') else False
                 if company:
                     request.env.cr.execute("""
-                        SELECT COALESCE(portal_login_page_image_web, logo_web) as logo_web, write_date
+                        SELECT COALESCE(portal_login_page_image_web, logo) as logo, write_date
                           FROM res_company
                          WHERE id = %s
                     """, (company,))
                 else:
                     request.env.cr.execute("""
-                        SELECT COALESCE(c.portal_login_page_image_web, c.logo_web) as logo_web, c.write_date
+                        SELECT COALESCE(c.portal_login_page_image_web, c.logo) as logo, c.write_date
                           FROM res_users u
                      LEFT JOIN res_company c
                             ON c.id = u.company_id
