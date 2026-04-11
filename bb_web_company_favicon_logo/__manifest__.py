@@ -21,8 +21,12 @@ Customize Favicon
     'auto_install': False,
     "application": True,
     'license': 'LGPL-3',
+    'images': ["static/description/images/ss1.png","static/description/images/ss2.png"],
     'assets': {
         'web.assets_backend': [
+            'bb_web_company_favicon_logo/static/src/js/favicon.js',
+        ],
+        'web.assets_frontend': [
             'bb_web_company_favicon_logo/static/src/js/favicon.js',
         ],
     },
