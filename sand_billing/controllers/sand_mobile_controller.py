@@ -35,7 +35,7 @@ class SandMobileViewController(http.Controller):
             search_id = receipt_id.strip()
             
             receipt = request.env['sand.billing.receipt'].sudo().search(
-                [('receipt_id', '=', search_id)],
+                ['|', ('receipt_id', '=', search_id), ('order_id', '=', search_id)],
                 limit=1
             )
 

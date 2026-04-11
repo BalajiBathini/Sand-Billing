@@ -365,14 +365,14 @@
                                         <div class="data-row"><span class="label">Consumer Mobile</span><span class="sep">:</span><span class="val" id="customerMobile">-</span></div>
                                         <div class="data-row"><span class="label">Registration Date</span><span class="sep">:</span><span class="val" id="registrationDate">-</span></div>
                                         <div class="data-row"><span class="label">Registration Type</span><span class="sep">:</span><span class="val" id="registrationType">-</span></div>
-                                        <div class="data-row"><span class="label">Registration QTY(in MT)</span><span class="sep">:</span><span class="val" id="registrationQty">-</span></div>
+                                        <div class="data-row"><span class="label">Registration QTY(in Tons)</span><span class="sep">:</span><span class="val" id="registrationQty">-</span></div>
                                         <div class="data-row"><span class="label">Registration Address</span><span class="sep">:</span><span class="val" id="regAddress">-</span></div>
 
                                         <div class="divider"></div>
 
                                         <!-- Section 2: Sand Availability -->
-                                        <div class="data-row"><span class="label">Available Sand QTY(in MT)</span><span class="sep">:</span><span class="val" id="availableQty">-</span></div>
-                                        <div class="data-row"><span class="label">Eligible Sand QTY(in MT)</span><span class="sep">:</span><span class="val" id="eligibleQty">-</span></div>
+                                        <div class="data-row"><span class="label">Available Sand QTY(in Tons)</span><span class="sep">:</span><span class="val" id="availableQty">-</span></div>
+                                        <div class="data-row"><span class="label">Eligible Sand QTY(in Tons)</span><span class="sep">:</span><span class="val" id="eligibleQty">-</span></div>
 
                                         <div class="divider"></div>
 
@@ -382,7 +382,7 @@
                                         <div class="data-row"><span class="label">Trip Number</span><span class="sep">:</span><span class="val" id="tripNo">-</span></div>
                                         <div class="data-row"><span class="label">Vehicle Number/Type</span><span class="sep">:</span><span class="val" id="vehicleNo">-</span></div>
                                         <div class="data-row"><span class="label">Driver Name/Mobile No</span><span class="sep">:</span><span class="val" id="driverInfo">-</span></div>
-                                        <div class="data-row"><span class="label">Dispatch QTY(in MT)</span><span class="sep">:</span><span class="val" id="dispatchQty">-</span></div>
+                                        <div class="data-row"><span class="label">Dispatch QTY(in Tons)</span><span class="sep">:</span><span class="val" id="dispatchQty">-</span></div>
                                         <div class="data-row"><span class="label">Dispatch Date Time</span><span class="sep">:</span><span class="val" id="dispatchDate">-</span></div>
                                         <div class="data-row"><span class="label">Dispatch Address</span><span class="sep">:</span><span class="val" id="address">-</span></div>
 
@@ -477,22 +477,28 @@
 
                         // Display receipt data
                         function displayReceipt(data) {
+                            // Update search bar to show Registration ID instead of Receipt ID
+                            const inputEl = document.getElementById('receiptInput');
+                            if (inputEl) {
+                                inputEl.value = data.order_id || '';
+                            }
+
                             setText('orderId', data.order_id);
                             setText('customerName', data.customer_name);
                             setText('customerMobile', data.customer_mobile);
                             setText('registrationDate', data.registration_date);
                             setText('registrationType', data.registration_type === 'general' ? 'GENERAL SAND CONSUMPTION' : data.registration_type);
-                            setText('registrationQty', data.registration_qty ? parseFloat(data.registration_qty).toFixed(1) + ' MT' : '-');
+                            setText('registrationQty', data.registration_qty ? parseFloat(data.registration_qty).toFixed(1) + ' Tons' : '-');
                             setText('regAddress', data.registration_address);
                             
-                            setText('availableQty', data.available_sand_qty ? parseFloat(data.available_sand_qty).toFixed(1) + ' MT' : '-');
-                            setText('eligibleQty', data.eligible_sand_qty ? parseFloat(data.eligible_sand_qty).toFixed(1) + ' MT' : '-');
+                            setText('availableQty', data.available_sand_qty ? parseFloat(data.available_sand_qty).toFixed(1) + ' Tons' : '-');
+                            setText('eligibleQty', data.eligible_sand_qty ? parseFloat(data.eligible_sand_qty).toFixed(1) + ' Tons' : '-');
 
                             setText('dispatchId', data.dispatch_id);
                             setText('tripNo', data.trip_no);
                             setText('vehicleNo', data.vehicle_no);
                             setText('driverInfo', (data.driver_name || '-') + ' / ' + (data.driver_phone || '-'));
-                            setText('dispatchQty', data.sand_quantity ? parseFloat(data.sand_quantity).toFixed(1) + ' MT' : '-');
+                            setText('dispatchQty', data.sand_quantity ? parseFloat(data.sand_quantity).toFixed(1) + ' Tons' : '-');
                             setText('dispatchDate', data.dispatch_date);
                             setText('address', data.address);
 
@@ -558,8 +564,8 @@
                             const params = new URLSearchParams(window.location.search);
                             const receiptId = params.get('receipt_id');
                             if (receiptId) {
-                                document.getElementById('receiptInput').value = receiptId;
-                                searchReceipt();
+                                // Don't set the input value here, displayReceipt will set it to order_id
+                                fetchReceipt(receiptId);
                             } else {
                                 document.getElementById('loading').style.display = 'none';
                                 document.getElementById('content').style.display = 'block';

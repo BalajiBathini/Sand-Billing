@@ -26,17 +26,17 @@ class SandBillingReceipt(models.Model):
     registration_type = fields.Selection([
         ('general', 'GENERAL SAND CONSUMPTION')
     ], string='Registration Type', default='general', required=True)
-    registration_qty = fields.Float(string='Registration QTY(in MT)', default=560.0, required=True)
+    registration_qty = fields.Float(string='Registration QTY(in Tons)', default=560.0, required=True)
     registration_address = fields.Text(string='Registration Address', required=True)
 
     # Sand Calculations
-    available_sand_qty = fields.Float(string='Available Sand QTY(in MT)')
-    eligible_sand_qty = fields.Float(string='Eligible Sand QTY(in MT)', compute='_compute_eligible_sand_qty', store=True)
+    available_sand_qty = fields.Float(string='Available Sand QTY(in Tons)')
+    eligible_sand_qty = fields.Float(string='Eligible Sand QTY(in Tons)', compute='_compute_eligible_sand_qty', store=True)
 
     # Dispatch Details
     dispatch_id = fields.Char(string='Dispatch ID', readonly=True, copy=False)
     vehicle_no = fields.Char(string='Vehicle Number/Type', required=True)
-    dispatch_qty = fields.Float(string='Dispatch QTY(in MT)', required=True)
+    dispatch_qty = fields.Float(string='Dispatch QTY(in Tons)', required=True)
     dispatch_date = fields.Datetime(string='Dispatch Date Time', required=True, default=fields.Datetime.now)
     address = fields.Text(string='Dispatch Address', required=True)
 

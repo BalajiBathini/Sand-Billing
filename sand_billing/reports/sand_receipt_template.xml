@@ -72,7 +72,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -155,7 +155,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
+                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -225,9 +225,7 @@
                             <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
                         <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT SYSTEM</h3>
-                            <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
-                            <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
+                            <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND<br/>MANAGEMENT SYSTEM</h3>
                         </div>
                         <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
                     </div>
@@ -255,7 +253,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Supply Point</strong></td>
@@ -293,9 +291,7 @@
                             <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
                         </t>
                         <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0; font-size: 16px;">AP SAND MANAGEMENT SYSTEM</h3>
-                            <p style="margin: 0; font-size: 11px; font-weight: bold; color: #d32f2f;">Department of Mines &amp; Geology</p>
-                            <p style="margin: 0; font-size: 9px; color: #1976d2;">Government of Andhra Pradesh</p>
+                            <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND<br/>MANAGEMENT SYSTEM</h3>
                         </div>
                         <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
                     </div>
@@ -323,7 +319,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> MT</td>
+                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
                             </tr>
                             <tr>
                                 <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>

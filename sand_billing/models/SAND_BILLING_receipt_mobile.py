@@ -125,7 +125,7 @@ class SandReceiptShareWizard(models.TransientModel):
                 <ul>
                     <li><strong>Receipt ID:</strong> {receipt.receipt_id}</li>
                     <li><strong>Registration ID:</strong> {receipt.order_id}</li>
-                    <li><strong>Dispatch Qty:</strong> {receipt.dispatch_qty} MT</li>
+                    <li><strong>Dispatch Qty:</strong> {receipt.dispatch_qty} Tons</li>
                     <li><strong>Dispatch Date:</strong> {receipt._get_ist_time_str('dispatch_date')}</li>
                 </ul>
                 <p>Thank you!</p>
