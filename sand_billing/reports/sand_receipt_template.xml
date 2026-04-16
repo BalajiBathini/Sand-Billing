@@ -1,353 +1,585 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-        <template id="report_sand_receipt">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <t t-call="sand_billing.report_sand_receipt_document" />
-                </t>
+    <template id="report_sand_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sand_billing.report_sand_receipt_document"/>
             </t>
-        </template>
+        </t>
+    </template>
 
-        <template id="report_sand_receipt_html">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <t t-call="sand_billing.report_sand_receipt_document_html" />
-                </t>
+    <template id="report_sand_receipt_html">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sand_billing.report_sand_receipt_document_html"/>
             </t>
-        </template>
+        </t>
+    </template>
 
-        <!-- PDF Template - Simple Thermal Receipt Format -->
-        <template id="report_sand_receipt_document">
-            <t t-call="web.basic_layout">
-                <div class="page" style="max-width: 80mm; margin: 0 auto; padding: 0; font-family: monospace; font-size: 9pt; line-height: 1.3;">
-
-                    <!-- CONSUMER COPY -->
-                    <div style="margin-bottom: 0;">
-                        <!-- Header -->
-                        <!-- Header -->
-                        <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width: 20mm; vertical-align: middle;">
-                                        <t t-if="doc.company_id.logo">
-                                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
-                                                 style="max-width: 18mm; height: auto;" alt="Logo"/>
-                                        </t>
-                                    </td>
-                                    <td style="vertical-align: middle; padding-left: 2mm;">
-                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
-                                        <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
-                                        <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- Registration Info -->
-                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
-                            GENERAL CONSUMER
-                        </div>
-                        <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
-                            Consumer Copy
-                        </div>
-
-                        <!-- Details -->
-                        <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order Id</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip Number</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.trip_no" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Name</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_name" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Mobile</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_mobile" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.sand_supply_point" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.vehicle_no" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Address</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.address" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Separator Line -->
-                    <div style="text-align: center; margin: 3mm 0; font-size: 8pt; line-height: 1;">
-                        <div>- - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-                        <div>- - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-                    </div>
-
-                    <!-- DRIVER COPY -->
-                    <div>
-                        <!-- Header -->
-                        <!-- Header -->
-                        <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width: 20mm; vertical-align: middle;">
-                                        <t t-if="doc.company_id.logo">
-                                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
-                                                 style="max-width: 18mm; height: auto;" alt="Logo"/>
-                                        </t>
-                                    </td>
-                                    <td style="vertical-align: middle; padding-left: 2mm;">
-                                        <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
-                                        <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology</div>
-                                        <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- Registration Info -->
-                        <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
-                            GENERAL CONSUMER
-                        </div>
-                        <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
-                            Driver Copy
-                        </div>
-
-                        <!-- Details -->
-                        <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Order Id</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.order_id" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Trip Number</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.trip_no" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Name</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_name" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Consumer Mobile</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.customer_mobile" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Supply Point</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.sand_supply_point" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.vehicle_no" /></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1mm; font-weight: bold;"><strong>Dispatch Address</strong></td>
-                                    <td style="padding: 1mm; text-align: right;"><t t-out="doc.address" /></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- QR Code -->
-                        <div style="text-align: center; margin: 2mm 0;">
-                            <img t-if="doc.qr_code" t-attf-src="data:image/png;base64,{{doc.qr_code}}"
-                                 style="max-width: 45mm; height: auto;" alt="QR Code"/>
-                        </div>
-
-                        <!-- Thank You -->
-                        <div style="text-align: center; font-weight: bold; font-size: 9pt;">
-                            Thank You
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </template>
-
-        <!-- HTML Template (for web preview) -->
-        <template id="report_sand_receipt_document_html">
-            <style>
-                @media print {
-                    body { margin: 0; padding: 0; }
-                    .receipt-container { margin: 0 !important; padding: 0 !important; }
-                }
-                .receipt-container { font-family: monospace; font-size: 12px; line-height: 1.3; }
-                .receipt-header { text-align: center; margin-bottom: 10px; }
-                .receipt-header img { max-width: 60px; height: auto; }
-                .receipt-header h3 { margin: 3px 0 0 0; font-size: 14px; font-weight: bold; }
-                .receipt-header p { margin: 0; font-size: 10px; }
-                .copy-title { text-align: center; margin-bottom: 10px; text-decoration: underline; font-weight: bold; font-size: 11px; }
-                .receipt-details { font-size: 11px; line-height: 1.5; margin-bottom: 10px; }
-                .receipt-details div { margin-bottom: 2px; }
-                .separator { text-align: center; margin: 15px 0; font-size: 10px; line-height: 0.8; }
-                .qr-section { text-align: center; margin: 10px 0; }
-                .qr-section img { max-width: 120px; height: auto; }
-                .coordinates { text-align: center; font-size: 10px; margin: 5px 0; }
-                .thank-you { text-align: center; font-weight: bold; font-size: 12px; margin-top: 5px; }
-            </style>
-            <div class="receipt-container" style="max-width: 300px; margin: 0 auto; padding: 10px;">
+    <!-- PDF Template - Simple Thermal Receipt Format -->
+    <template id="report_sand_receipt_document">
+        <t t-call="web.basic_layout">
+            <div class="page"
+                 style="max-width: 80mm; margin: 0 auto; padding: 0; font-family: monospace; font-size: 9pt; line-height: 1.3;">
 
                 <!-- CONSUMER COPY -->
                 <div style="margin-bottom: 0;">
-                    <div class="receipt-header">
-                        <t t-if="doc.company_id.logo">
-                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
-                        </t>
-                        <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND<br/>MANAGEMENT SYSTEM</h3>
-                        </div>
-                        <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
+                    <!-- Header -->
+                    <!-- Header -->
+                    <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 20mm; vertical-align: middle;">
+                                    <t t-if="doc.company_id.logo">
+                                        <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
+                                             style="max-width: 18mm; height: auto;" alt="Logo"/>
+                                    </t>
+                                </td>
+                                <td style="vertical-align: middle; padding-left: 2mm;">
+                                    <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
+                                    <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology
+                                    </div>
+                                    <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
-                    <div class="copy-title" style="margin-top: 10px;">GENERAL CONSUMER</div>
-                    <div style="text-align: center; font-size: 10px; font-style: italic; margin-bottom: 10px;">Consumer Copy</div>
+                    <!-- Registration Info -->
+                    <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
+                        GENERAL CONSUMER
+                    </div>
+                    <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
+                        Consumer Copy
+                    </div>
 
-                    <div class="receipt-details">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                    <!-- Details -->
+                    <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
+                        <table style="width: 100%; border-collapse: collapse;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Order Id</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Order Id</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.order_id"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Trip Number</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.trip_no" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Trip No</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.trip_no"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Name</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_name" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Consumer Name</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.customer_name"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Mobile</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_mobile" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Consumer Mobile</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.customer_mobile"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Qty</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="'{:.1f}'.format(doc.dispatch_qty)"/>
+                                    Tons
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Supply Point</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.sand_supply_point" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Supply Point</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.sand_supply_point"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Date</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc._get_ist_time_str('dispatch_date')"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Driver Name/Mobile No</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.driver_name"/>
+                                    /
+                                    <t t-out="doc.driver_phone"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.vehicle_no" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Vehicle Number/Type</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.vehicle_no"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Address</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.address" /></td>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Address</strong>
+                                </td>
+                                <td style=" padding: 1mm;
+        text-align: right;
+        width: 60%;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+        max-width: 35mm;">
+                                    <t t-out="doc.address"/>
+                                </td>
                             </tr>
                         </table>
                     </div>
                 </div>
 
-                <div class="separator">
-                    - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br/>
-                    - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                <!-- Separator Line -->
+                <div style="text-align: center; margin: 3mm 0; font-size: 8pt; line-height: 1;">
+                    <div>- - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+                    <div>- - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
                 </div>
 
                 <!-- DRIVER COPY -->
                 <div>
-                    <div class="receipt-header">
-                        <t t-if="doc.company_id.logo">
-                            <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo" style="max-width: 50px; float: left; margin-right: 10px;"/>
-                        </t>
-                        <div style="text-align: left; overflow: hidden;">
-                            <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND<br/>MANAGEMENT SYSTEM</h3>
-                        </div>
-                        <div style="clear: both; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;"></div>
-                    </div>
-
-                    <div class="copy-title" style="margin-top: 10px;">GENERAL CONSUMER</div>
-                    <div style="text-align: center; font-size: 10px; font-style: italic; margin-bottom: 10px;">Driver Copy</div>
-
-                    <div class="receipt-details">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                    <!-- Header -->
+                    <!-- Header -->
+                    <div style="margin-bottom: 4mm; border-bottom: 1px solid #000; padding-bottom: 2mm;">
+                        <table style="width: 100%;">
                             <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Order Id</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.order_id" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Trip Number</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.trip_no" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Name</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_name" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Consumer Mobile</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.customer_mobile" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Qty</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="'{:.1f}'.format(doc.dispatch_qty)" /> Tons</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Date</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc._get_ist_time_str('dispatch_date')" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Driver Name/Mobile No</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.driver_name" /> / <t t-out="doc.driver_phone" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Vehicle Number/Type</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.vehicle_no" /></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 3px; font-weight: bold;"><strong>Dispatch Address</strong></td>
-                                <td style="padding: 3px; text-align: right;"><t t-out="doc.address" /></td>
+                                <td style="width: 20mm; vertical-align: middle;">
+                                    <t t-if="doc.company_id.logo">
+                                        <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}"
+                                             style="max-width: 18mm; height: auto;" alt="Logo"/>
+                                    </t>
+                                </td>
+                                <td style="vertical-align: middle; padding-left: 2mm;">
+                                    <div style="font-size: 11pt; font-weight: bold;">AP SAND MANAGEMENT SYSTEM</div>
+                                    <div style="font-size: 8pt; font-weight: bold;">Department of Mines &amp; Geology
+                                    </div>
+                                    <div style="font-size: 7pt;">Government of Andhra Pradesh</div>
+                                </td>
                             </tr>
                         </table>
                     </div>
 
-                    <div class="qr-section">
-                        <img t-if="doc.qr_code" t-attf-src="data:image/png;base64,{{doc.qr_code}}" alt="QR Code"/>
+                    <!-- Registration Info -->
+                    <div style="text-align: center; margin-bottom: 2mm; text-decoration: underline; font-weight: bold; font-size: 10pt;">
+                        GENERAL CONSUMER
+                    </div>
+                    <div style="text-align: center; margin-bottom: 2mm; font-style: italic; font-size: 8pt;">
+                        Driver Copy
                     </div>
 
-                    <div class="thank-you">Thank You</div>
+                    <!-- Details -->
+                    <div style="font-size: 8pt; margin-bottom: 2mm; line-height: 1.5;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Order Id</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.order_id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Trip No</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.trip_no"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Consumer Name</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.customer_name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Consumer Mobile</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.customer_mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Qty</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="'{:.1f}'.format(doc.dispatch_qty)"/>
+                                    Tons
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Supply Point</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.sand_supply_point"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Date</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc._get_ist_time_str('dispatch_date')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Driver Name/Mobile No</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.driver_name"/>
+                                    /
+                                    <t t-out="doc.driver_phone"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Vehicle Number/Type</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.vehicle_no"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1mm; font-weight: bold;">
+                                    <strong>Dispatch Address</strong>
+                                </td>
+                                <td style="padding: 1mm; text-align: right;">
+                                    <t t-out="doc.address"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div style="text-align: center; margin: 2mm 0;">
+                        <img t-if="doc.qr_code" t-attf-src="data:image/png;base64,{{doc.qr_code}}"
+                             style="max-width: 45mm; height: auto;" alt="QR Code"/>
+                    </div>
+
+                    <!-- Thank You -->
+                    <div style="text-align: center; font-weight: bold; font-size: 9pt;">
+                        Thank You
+                    </div>
                 </div>
             </div>
-        </template>
+        </t>
+    </template>
+
+    <!-- HTML Template (for web preview) -->
+    <template id="report_sand_receipt_document_html">
+        <style>
+            @media print {
+            body { margin: 0; padding: 0; }
+            .receipt-container { margin: 0 !important; padding: 0 !important; }
+            }
+            .receipt-container { font-family: monospace; font-size: 12px; line-height: 1.3; }
+            .receipt-header { text-align: center; margin-bottom: 10px; }
+            .receipt-header img { max-width: 60px; height: auto; }
+            .receipt-header h3 { margin: 3px 0 0 0; font-size: 14px; font-weight: bold; }
+            .receipt-header p { margin: 0; font-size: 10px; }
+            .copy-title { text-align: center; margin-bottom: 10px; text-decoration: underline; font-weight: bold;
+            font-size: 11px; }
+            .receipt-details { font-size: 11px; line-height: 1.5; margin-bottom: 10px; }
+            .receipt-details div { margin-bottom: 2px; }
+            .separator { text-align: center; margin: 15px 0; font-size: 10px; line-height: 0.8; }
+            .qr-section { text-align: center; margin: 10px 0; }
+            .qr-section img { max-width: 120px; height: auto; }
+            .coordinates { text-align: center; font-size: 10px; margin: 5px 0; }
+            .thank-you { text-align: center; font-weight: bold; font-size: 12px; margin-top: 5px; }
+        </style>
+        <div class="receipt-container" style="max-width: 300px; margin: 0 auto; padding: 10px;">
+
+            <!-- CONSUMER COPY -->
+            <div style="margin-bottom: 0;">
+                <div class="receipt-header">
+                    <t t-if="doc.company_id.logo">
+                        <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo"
+                             style="max-width: 50px; float: left; margin-right: 10px;"/>
+                    </t>
+                    <div style="text-align: left; overflow: hidden;">
+                        <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND</h3>
+                        <h3 style="margin: 0;text-align: center;  font-size: 12px;">MANAGEMENT SYSTEM</h3>
+                    </div>
+                    <!--                        <div style="clear: both; margin-bottom: 5px; border-bottom: 1px solid #ddd; padding-bottom: 3px;"></div>-->
+                </div>
+                <div style="text-align: center; font-size: 10px; font-style: italic;">Consumer
+                    Copy
+                </div>
+                <div class="separator">
+                    - - - - - - - - - - - - - - - - - - - - - - - - -
+                </div>
+
+                <div class="receipt-details">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Order Id</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.order_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Id</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.dispatch_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Trip No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.trip_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Consumer Name</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.customer_name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Consumer Mobile</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.customer_mobile"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Qty</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="'{:.1f}'.format(doc.dispatch_qty)"/>
+                                Tons
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Supply Point</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.sand_supply_point"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Date</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc._get_ist_time_str('dispatch_date')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Driver Name</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.driver_name"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Driver Mobile No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.driver_phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Vehicle No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.vehicle_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Address</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;
+
+        width: 60%;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+        max-width: 35mm;">
+                                <t t-out="doc.address"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="separator">
+                - - - - - - - - - - - - - - - - - - - - - - - - -
+                <br/>
+                - - - - - - - - - - - - - - - - - - - - - - - - -
+            </div>
+
+            <!-- DRIVER COPY -->
+            <div>
+                <div class="receipt-header">
+                    <t t-if="doc.company_id.logo">
+                        <img t-attf-src="data:image/png;base64,{{doc.company_id.logo}}" alt="Logo"
+                             style="max-width: 50px; float: left; margin-right: 10px;"/>
+                    </t>
+                     <div style="text-align: left; overflow: hidden;">
+                        <h3 style="margin: 0;text-align: center;  font-size: 16px;">AP SAND</h3>
+                        <h3 style="margin: 0;text-align: center;  font-size: 12px;">MANAGEMENT SYSTEM</h3>
+                    </div>
+                    <!--                        <div style="clear: both; margin-bottom: 5px; border-bottom: 1px solid #ddd; padding-bottom: 3px;"></div>-->
+                </div>
+
+
+                <div style="text-align: center; font-size: 10px; font-style: italic;">Driver Copy
+                </div>
+                <div class="separator">
+
+                    - - - - - - - - - - - - - - - - - - - - - - - - -
+                </div>
+
+                <div class="receipt-details">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Order Id</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.order_id"/>
+                            </td>
+                        </tr><tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Id</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.dispatch_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Trip No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.trip_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Consumer Name</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.customer_name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Consumer Mobile</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.customer_mobile"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Qty</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="'{:.1f}'.format(doc.dispatch_qty)"/>
+                                Tons
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Date</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc._get_ist_time_str('dispatch_date')"/>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Driver Name</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.driver_name"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Driver Mobile No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.driver_phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Vehicle No</strong>
+                            </td>
+                            <td style="padding: 3px; text-align: right;">
+                                <t t-out="doc.vehicle_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px; font-weight: bold;">
+                                <strong>Dispatch Address</strong>
+                            </td>
+                            <td style="padding: 3px;
+        text-align: right;
+        width: 60%;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+        max-width: 35mm;">
+                                <t t-out="doc.address"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="qr-section">
+                    <img t-if="doc.qr_code" t-attf-src="data:image/png;base64,{{doc.qr_code}}" alt="QR Code"/>
+                </div>
+
+                <div class="thank-you">14.6843324,78.0257817<br/>Thank You</div>
+            </div>
+        </div>
+    </template>
 
 </odoo>
 

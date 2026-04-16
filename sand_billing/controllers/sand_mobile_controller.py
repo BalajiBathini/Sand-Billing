@@ -68,6 +68,7 @@ class SandMobileViewController(http.Controller):
                     'driver_name': receipt.driver_name,
                     'driver_phone': receipt.driver_phone,
                     'vehicle_no': receipt.vehicle_no,
+                    'vehicle_type': receipt.vehicle_type,
                     'address': receipt.address,
                     'state': receipt.state,
                 }

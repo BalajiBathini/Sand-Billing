@@ -1,10 +1,10 @@
 {
     'name': 'Sand Billing System',
-    'version': '19.0.1.0.0',
+    'version': '18.0.1.0.0',
     'category': 'Sales',
     'summary': 'Billing system for sand selling with QR code and thermal printing',
     'author': 'BalajiBathini',
-    'website': 'https://www.yourcompany.com',
+    'website': 'https:/www.yourcompany.com',
     'license': 'LGPL-3',
     'depends': [
         'base',

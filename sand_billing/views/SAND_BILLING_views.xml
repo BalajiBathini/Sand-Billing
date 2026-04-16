@@ -68,6 +68,7 @@
                                 <field name="dispatch_id" />
                                 <field name="trip_no" />
                                 <field name="vehicle_no" />
+                                <field name="vehicle_type" />
                                 <field name="driver_name" />
                                 <field name="driver_phone" />
                             </group>

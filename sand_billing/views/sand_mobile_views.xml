@@ -496,8 +496,8 @@
 
                             setText('dispatchId', data.dispatch_id);
                             setText('tripNo', data.trip_no);
-                            setText('vehicleNo', data.vehicle_no);
-                            setText('driverInfo', (data.driver_name || '-') + ' / ' + (data.driver_phone || '-'));
+                            setText('vehicleNo', (data.vehicle_no|| '-')+'(' + (data.vehicle_type || '-') + ')');
+                            setText('driverInfo', (data.driver_name || '-') + ' , ' + (data.driver_phone || '-'));
                             setText('dispatchQty', data.sand_quantity ? parseFloat(data.sand_quantity).toFixed(1) + ' Tons' : '-');
                             setText('dispatchDate', data.dispatch_date);
                             setText('address', data.address);
