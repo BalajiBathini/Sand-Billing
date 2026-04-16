@@ -3,7 +3,7 @@
 
 {
     'name': 'Customize Company Backend web icon',
-    'version': '18.0.0.1',
+    'version': '19.0.0.1',
     'category': 'Extra Tools',
     'sequence': 20,
     'author': 'BB Logic',
