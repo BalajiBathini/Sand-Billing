@@ -1,4 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sand_billing_receipt,sand.billing.receipt.access,model_sand_billing_receipt,base.group_user,1,1,1,1
 
-sand_billing.access_sand_receipt_share_wizard,access_sand_receipt_share_wizard,sand_billing.model_sand_receipt_share_wizard,base.group_user,1,1,1,1
+# USER (no delete)
+access_sand_billing_receipt_user,sand.billing.receipt.user,model_sand_billing_receipt,base.group_user,1,1,1,0
+access_sand_receipt_share_wizard_user,sand.receipt.share.wizard.user,sand_billing.model_sand_receipt_share_wizard,base.group_user,1,1,1,0
+
+# MANAGER (full access)
+access_sand_billing_receipt_manager,sand.billing.receipt.manager,model_sand_billing_receipt,sand_billing.group_sand_manager,1,1,1,1
+access_sand_receipt_share_wizard_manager,sand.receipt.share.wizard.manager,sand_billing.model_sand_receipt_share_wizard,sand_billing.group_sand_manager,1,1,1,1
