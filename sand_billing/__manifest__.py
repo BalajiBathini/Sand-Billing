@@ -13,8 +13,9 @@
     ],
     'data': [
         'data/sequences.xml',
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
+        
         'views/SAND_BILLING_views.xml',
         'views/sand_mobile_views.xml',
         'views/sand_mobile_views_form.xml',
