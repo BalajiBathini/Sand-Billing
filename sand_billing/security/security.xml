@@ -1,6 +1,5 @@
 <odoo>
     <record id="group_sand_manager" model="res.groups">
         <field name="name">Sand Manager</field>
-        <field name="category_id" ref="base.module_category_hidden"/>
     </record>
 </odoo>
