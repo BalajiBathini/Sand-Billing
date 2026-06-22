@@ -319,9 +319,8 @@
                                     <img t-attf-src="data:image/png;base64,{{res_company.logo}}" class="logo-img" alt="Logo"/>
                                 </t>
                                 <div class="header-text">
-                                    <h1>AP SAND MANAGEMENT SYSTEM</h1>
-                                    <p>Department of Mines &amp; Geology</p>
-                                    <p>Government of Andhra Pradesh</p>
+                                    <h1>AP SAND</h1>
+                                    <h2 style="font-family: 'Oswald', 'Arial Narrow', sans-serif; color: #009e4f; font-size: clamp(14px, 5vw, 20px); margin: 0; text-align: center; text-transform: uppercase;">MANAGEMENT SYSTEM</h2>
                                 </div>
                             </div>
 
@@ -355,7 +354,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <i class="fas fa-shopping-cart"></i>
-                                        GENERAL CONSUMER
+                                        Consumer Copy
                                     </div>
 
                                     <div class="card-body">
@@ -379,7 +378,7 @@
 
 
                                         <!-- Section 3: Dispatch Details -->
-                                        <div class="data-row"><span class="label">Dispatch ID</span><span class="sep">:</span><span class="val" id="dispatchId">-</span></div>
+                                        <div class="data-row"><span class="label">Hologram Id</span><span class="sep">:</span><span class="val" id="dispatchId">-</span></div>
                                         <div class="data-row"><span class="label">Trip Number</span><span class="sep">:</span><span class="val" id="tripNo">-</span></div>
                                         <div class="data-row"><span class="label">Vehicle Number/Type</span><span class="sep">:</span><span class="val" id="vehicleNo">-</span></div>
                                         <div class="data-row"><span class="label">Driver Name/Mobile No</span><span class="sep">:</span><span class="val" id="driverInfo">-</span></div>
@@ -492,7 +491,7 @@
                             setText('registrationType', data.registration_type === 'general' ? 'GENERAL SAND CONSUMPTION' : data.registration_type);
                             setText('registrationQty', data.registration_qty ? parseFloat(data.registration_qty).toFixed(1) + ' Tons' : '-');
                             setText('regAddress', data.registration_address);
-                            
+
                             setText('availableQty', data.available_sand_qty ? parseFloat(data.available_sand_qty).toFixed(1) + ' Tons' : '-');
                             setText('eligibleQty', data.eligible_sand_qty ? parseFloat(data.eligible_sand_qty).toFixed(1) + ' Tons' : '-');
 
