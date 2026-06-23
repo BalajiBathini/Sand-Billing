@@ -48,7 +48,7 @@ class SandBillingReceipt(models.Model):
 
     # Sand Details (Legacy/Internal)
     sand_quantity = fields.Float(string='Sand Quantity (Tons)', related='dispatch_qty', readonly=False)
-    sand_supply_point = fields.Char(string='Sand Supply Point Name',default='Sri G.Chandramohan Naidu', required=True)
+    sand_supply_point = fields.Char(string='Sand Supply Point Name',default='CC REVU-C Venkatapathi', required=True)
 
     # Additional Details
     construction_name = fields.Char(string='Construction Name', required=True)
