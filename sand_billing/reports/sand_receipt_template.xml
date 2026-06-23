@@ -323,7 +323,7 @@
                <!-- <div class="transit-row" style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 8px;">
                     <div class="copy-title" style="margin-bottom: 0;">Transit Copy</div>
                     <div class="transit-box">Stick<br/>HOLOGRAM<br/>Here</div>
-                </div>
+                </div>-->
                 <div class="transit-row"
      style="display:flex;
             justify-content:center;
@@ -345,25 +345,12 @@
                 width:80px;
                 font-weight:bold;">
         Stick<br/>HOLOGRAM<br/>Here
-    </div>-->
-                <div style="text-align: center; margin-bottom: 3mm;">
-                        <table style="width: 100%;">
-                            <tr>
-                                <td style="width: 50%; text-align: left; vertical-align: middle; padding-left: 2mm; font-size: 10pt; font-weight: bold;">
-                                    Transit Copy
-                                </td>
-                                <td style="width: 50%; text-align: center; vertical-align: middle;">
-                                    <div style="display: inline-block; border: 1px solid #000; border-radius: 4px; padding: 2px 4px; font-weight: bold; font-family: sans-serif; font-size: 7.5pt; text-align: center; line-height: 1.1;">
-                                        Stick<br/>HOLOGRAM<br/>Here
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+    </div>
+                
 
     
 
-</div>
+
                 <div class="separator">
                 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             </div>
