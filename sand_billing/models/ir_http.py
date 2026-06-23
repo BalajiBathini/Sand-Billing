@@ -19,7 +19,8 @@ class IrHttp(models.AbstractModel):
 
         if request and request.session.uid:
 
-            user = request.env['res.users'].sudo().browse(request.session.uid)
+            env = request.env(user=request.session.uid, su=True)
+            user = env['res.users'].browse(request.session.uid)
 
             # If user just logged in, capture the freshly rotated Session SID
             if request.session.get('update_active_session'):

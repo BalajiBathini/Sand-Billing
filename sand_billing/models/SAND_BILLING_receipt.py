@@ -34,7 +34,8 @@ class SandBillingReceipt(models.Model):
     eligible_sand_qty = fields.Float(string='Eligible Sand QTY(in Tons)', compute='_compute_eligible_sand_qty', store=True)
 
     # Dispatch Details
-    dispatch_id = fields.Char(string='Hologram Id', readonly=True, copy=False)
+    dispatch_id = fields.Char(string='Dispatch ID', readonly=True, copy=False)
+    hologram_id = fields.Char(string='Hologram Id', copy=False)
     vehicle_no = fields.Char(string='Vehicle Number', required=True)
     vehicle_type = fields.Selection([('6_tyre','6-Tyre'),('10_tyre','10-Tyre') ,('12_tyre','12-Tyre'),('14_tyre','14-Tyre'),('16_tyre', '16-Tyre'),], string='Vehicle Type', required=True)
     dispatch_qty = fields.Float(string='Dispatch QTY(in Tons)', required=True)

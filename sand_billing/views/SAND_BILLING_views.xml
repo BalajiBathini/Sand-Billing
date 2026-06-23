@@ -70,6 +70,7 @@
                     <group>
                         <group>
                             <field name="dispatch_id"/>
+                            <field name="hologram_id"/>
                             <field name="trip_no"/>
                             <field name="vehicle_no"/>
                             <field name="vehicle_type"/>

@@ -53,6 +53,7 @@ class SandMobileViewController(http.Controller):
                     'order_id': receipt.order_id,
                     'trip_no': receipt.trip_no,
                     'dispatch_id': receipt.dispatch_id or '-',
+                    'hologram_id': receipt.hologram_id or '-',
                     'customer_name': receipt.customer_name,
                     'customer_mobile': receipt.customer_mobile,
                     'construction_name': receipt.construction_name,

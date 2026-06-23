@@ -495,7 +495,7 @@
                             setText('availableQty', data.available_sand_qty ? parseFloat(data.available_sand_qty).toFixed(1) + ' Tons' : '-');
                             setText('eligibleQty', data.eligible_sand_qty ? parseFloat(data.eligible_sand_qty).toFixed(1) + ' Tons' : '-');
 
-                            setText('dispatchId', data.dispatch_id);
+                            setText('dispatchId', data.hologram_id);
                             setText('tripNo', data.trip_no);
                             setText('vehicleNo', (data.vehicle_no|| '-')+'(' + (data.vehicle_type || '-') + ')');
                             setText('driverInfo', (data.driver_name || '-') + ' , ' + (data.driver_phone || '-'));
