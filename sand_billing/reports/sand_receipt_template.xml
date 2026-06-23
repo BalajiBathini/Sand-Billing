@@ -328,8 +328,15 @@
      style="display:flex;
             justify-content:center;
             align-items:center;
-            gap:20px;
-            margin:10px 0;">
+            gap:10px;
+            margin:5px 0;">
+
+                    <div class="copy-title"
+         style="font-size:18px;
+                font-weight:bold;
+                text-align:center;">
+        Transit Copy
+    </div>
 
     <div class="transit-box"
          style="border:1px solid #000;
@@ -340,12 +347,7 @@
         Stick<br/>HOLOGRAM<br/>Here
     </div>
 
-    <div class="copy-title"
-         style="font-size:18px;
-                font-weight:bold;
-                text-align:center;">
-        Transit Copy
-    </div>
+    
 
 </div>
                 <div class="separator">
