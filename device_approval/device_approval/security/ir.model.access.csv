@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_user_device_admin,res.user.device.admin,model_res_user_device,base.group_system,1,1,1,1
+access_res_user_device_user,res.user.device.user,model_res_user_device,base.group_user,1,0,0,0
+access_device_login_history_admin,device.login.history.admin,model_device_login_history,base.group_system,1,1,1,1
+access_device_login_history_user,device.login.history.user,model_device_login_history,base.group_user,1,0,0,0
+access_device_reject_wizard_admin,device.reject.wizard.admin,model_device_reject_wizard,base.group_system,1,1,1,1
+access_device_otp_wizard_admin,device.otp.wizard.admin,model_device_otp_wizard,base.group_system,1,1,1,1
+access_device_otp_wizard_user,device.otp.wizard.user,model_device_otp_wizard,base.group_user,1,1,1,1

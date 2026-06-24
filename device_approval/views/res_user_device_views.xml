@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── List View ─────────────────────────────────────────────────────── -->
+    <record id="view_res_user_device_list" model="ir.ui.view">
+        <field name="name">res.user.device.list</field>
+        <field name="model">res.user.device</field>
+        <field name="arch" type="xml">
+            <list string="Device Approvals"
+                  decoration-success="status == 'approved'"
+                  decoration-warning="status == 'pending'"
+                  decoration-danger="status in ('rejected', 'revoked')"
+                  default_order="create_date desc">
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="device_name"/>
+                <field name="browser"/>
+                <field name="os_name"/>
+                <field name="ip_address"/>
+                <field name="last_login"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'approved'"
+                       decoration-warning="status == 'pending'"
+                       decoration-danger="status in ('rejected', 'revoked')"/>
+                <field name="create_date" string="First Seen"/>
+                <field name="login_count" string="Logins"/>
+                <button name="action_approve" type="object"
+                        string="Approve" class="btn-success"
+                        invisible="status != 'pending'"
+                        groups="base.group_system"/>
+                <button name="action_reject" type="object"
+                        string="Reject" class="btn-danger"
+                        invisible="status not in ('pending', 'approved')"
+                        groups="base.group_system"/>
+                <button name="action_revoke" type="object"
+                        string="Revoke" class="btn-warning"
+                        invisible="status != 'approved'"
+                        groups="base.group_system"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ── Form View ─────────────────────────────────────────────────────── -->
+    <record id="view_res_user_device_form" model="ir.ui.view">
+        <field name="name">res.user.device.form</field>
+        <field name="model">res.user.device</field>
+        <field name="arch" type="xml">
+            <form string="Device">
+                <header>
+                    <button name="action_approve" type="object"
+                            string="Approve" class="btn-primary"
+                            invisible="status != 'pending'"
+                            groups="base.group_system"/>
+                    <button name="action_reject" type="object"
+                            string="Reject"
+                            invisible="status not in ('pending', 'approved')"
+                            groups="base.group_system"/>
+                    <button name="action_revoke" type="object"
+                            string="Revoke"
+                            invisible="status != 'approved'"
+                            groups="base.group_system"/>
+                    <button name="action_send_otp" type="object"
+                            string="Send OTP to User"
+                            invisible="status != 'pending'"
+                            groups="base.group_system"/>
+                    <field name="status" widget="statusbar"
+                           statusbar_visible="pending,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="action_view_login_history"
+                                icon="fa-history"
+                                invisible="login_count == 0">
+                            <field name="login_count" widget="statinfo" string="Logins"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="device_name" placeholder="Device Name"/></h1>
+                    </div>
+                    <group>
+                        <group string="User Information">
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="ip_address"/>
+                        </group>
+                        <group string="Device Information">
+                            <field name="browser"/>
+                            <field name="os_name"/>
+                            <field name="fingerprint" widget="char"
+                                   groups="base.group_system"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Timeline">
+                            <field name="create_date" string="First Seen" readonly="1"/>
+                            <field name="last_login" readonly="1"/>
+                            <field name="approved_date" readonly="1"
+                                   invisible="status not in ('approved', 'revoked')"/>
+                            <field name="approved_by" readonly="1"
+                                   invisible="status not in ('approved', 'revoked')"/>
+                            <field name="rejected_date" readonly="1"
+                                   invisible="status != 'rejected'"/>
+                        </group>
+                        <group string="Rejection" invisible="status != 'rejected'">
+                            <field name="rejection_reason" nolabel="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ── Kanban View ────────────────────────────────────────────────────── -->
+    <record id="view_res_user_device_kanban" model="ir.ui.view">
+        <field name="name">res.user.device.kanban</field>
+        <field name="model">res.user.device</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" class="o_kanban_small_column">
+                <field name="user_id"/>
+                <field name="device_name"/>
+                <field name="browser"/>
+                <field name="os_name"/>
+                <field name="ip_address"/>
+                <field name="status"/>
+                <field name="color"/>
+                <field name="last_login"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_color_#{record.color.raw_value}">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="user_id"/>
+                                </strong>
+                                <div class="o_kanban_record_subtitle">
+                                    <i class="fa fa-desktop"/> <field name="device_name"/>
+                                </div>
+                                <div>
+                                    <i class="fa fa-globe"/> <field name="browser"/>
+                                    &amp;nbsp;|&amp;nbsp;
+                                    <i class="fa fa-laptop"/> <field name="os_name"/>
+                                </div>
+                                <div><i class="fa fa-map-marker"/> <field name="ip_address"/></div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="status" widget="badge"
+                                               decoration-success="status == 'approved'"
+                                               decoration-warning="status == 'pending'"
+                                               decoration-danger="status in ('rejected','revoked')"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right" groups="base.group_system">
+                                        <button t-if="record.status.raw_value == 'pending'"
+                                                name="action_approve" type="object"
+                                                class="btn btn-sm btn-success">Approve</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ── Search View ────────────────────────────────────────────────────── -->
+    <record id="view_res_user_device_search" model="ir.ui.view">
+        <field name="name">res.user.device.search</field>
+        <field name="model">res.user.device</field>
+        <field name="arch" type="xml">
+            <search string="Search Devices">
+                <field name="user_id"/>
+                <field name="device_name"/>
+                <field name="browser"/>
+                <field name="os_name"/>
+                <field name="ip_address"/>
+                <filter name="pending" string="Pending" domain="[('status','=','pending')]"/>
+                <filter name="approved" string="Approved" domain="[('status','=','approved')]"/>
+                <filter name="rejected" string="Rejected" domain="[('status','=','rejected')]"/>
+                <filter name="revoked" string="Revoked" domain="[('status','=','revoked')]"/>
+                <separator/>
+                <filter name="my_devices" string="My Devices"
+                        domain="[('user_id','=',uid)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_user" string="User"
+                            context="{'group_by': 'user_id'}"/>
+                    <filter name="group_by_status" string="Status"
+                            context="{'group_by': 'status'}"/>
+                    <filter name="group_by_browser" string="Browser"
+                            context="{'group_by': 'browser'}"/>
+                    <filter name="group_by_os" string="OS"
+                            context="{'group_by': 'os_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ── Main Action ────────────────────────────────────────────────────── -->
+    <record id="action_res_user_device" model="ir.actions.act_window">
+        <field name="name">Device Approvals</field>
+        <field name="res_model">res.user.device</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No device approval requests yet!
+            </p>
+            <p>
+                When users log in from a new device, their request will appear here for review.
+            </p>
+        </field>
+    </record>
+
+    <!-- ── Pending Only Action ────────────────────────────────────────────── -->
+    <record id="action_res_user_device_pending" model="ir.actions.act_window">
+        <field name="name">Pending Device Approvals</field>
+        <field name="res_model">res.user.device</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('status', '=', 'pending')]</field>
+    </record>
+
+</odoo>

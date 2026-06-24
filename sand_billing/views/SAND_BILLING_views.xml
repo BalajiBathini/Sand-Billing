@@ -126,6 +126,7 @@
     <menuitem
             id="menu_SAND_BILLING_root"
             name="Sand Billing"
+            groups="sand_billing.group_sand_user,sand_billing.group_sand_manager"
             sequence="1"/>
 
     <menuitem
@@ -134,6 +135,14 @@
             action="action_SAND_BILLING_receipt"
             parent="menu_SAND_BILLING_root"
             sequence="1"/>
+
+    <!-- Move Paper Format menu under Sand Billing -> Only visible to Sand Manager / System Admin -->
+    <menuitem
+            id="base.paper_format_menuitem"
+            parent="menu_SAND_BILLING_root"
+            name="paper format"
+            groups="sand_billing.group_sand_manager,base.group_system"
+            sequence="99"/>
 
 </odoo>
 

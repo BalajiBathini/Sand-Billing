@@ -1,0 +1,37 @@
+/* ── Device Approval – Login Page Styles ──────────────────────────────── */
+
+.o_device_blocked_alert {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-left: 4px solid #ffc107;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #856404;
+}
+
+.o_device_blocked_alert.rejected {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #842029;
+}
+
+.o_device_blocked_alert .o_device_icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.o_device_blocked_alert strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+/* OTP input styling */
+.o_device_otp_input {
+    letter-spacing: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

@@ -71,6 +71,7 @@ class SandBillingReceipt(models.Model):
 
     # Created date for reference
     created_date = fields.Datetime(string='Created Date', readonly=True, default=fields.Datetime.now)
+    user_id = fields.Many2one('res.users', string='Salesperson / Owner', default=lambda self: self.env.user, tracking=True)
 
     def _get_ist_time_str(self, field_name):
         """Helper to return IST formatted string (12-hour) for a datetime field"""
