@@ -249,7 +249,7 @@
             .receipt-details td { padding: 3px; }
             .separator { text-align: center; font-size: 11px; line-height: 1; margin: 10px 0; }
             .qr-section { text-align: center; margin: 10px 0; }
-            .qr-section img { max-width: 100px; height: auto; }
+            .qr-section img { max-width: 150px; height: auto; }
             .coordinates { text-align: center; font-size: 11px; margin: 5px 0; }
             .thank-you { text-align: center; font-weight: bold; font-size: 12px; margin-top: 5px; }
             .transit-box { display: inline-block; border: 1.5px solid #000; border-radius: 4px; padding: 3px 6px; font-weight: bold; font-family: sans-serif; font-size: 10px; text-align: center; line-height: 1.2; }
