@@ -24,10 +24,10 @@
          Record Rule - User
          ========================= -->
     <record id="sand_billing_receipt_rule_personal" model="ir.rule">
-        <field name="name">User Own Receipts Only</field>
+        <field name="name">User Own Receipts Only (Last 1 Hour)</field>
         <field name="model_id" ref="model_sand_billing_receipt"/>
         <field name="domain_force">
-            [('user_id', '=', user.id)]
+            [('user_id', '=', user.id), ('create_date', '&gt;=', (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M:%S'))]
         </field>
         <field name="groups" eval="[(4, ref('sand_billing.group_sand_user'))]"/>
         <field name="perm_read" eval="True"/>
