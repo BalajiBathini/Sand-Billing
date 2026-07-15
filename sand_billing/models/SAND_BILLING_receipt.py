@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from datetime import datetime
+from datetime import datetime, timedelta
 import qrcode
 import io
 import base64
@@ -11,6 +11,19 @@ class SandBillingReceipt(models.Model):
     _description = 'Sand Billing Receipt'
     _rec_name = 'receipt_id'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    is_recent = fields.Boolean(string='Is Recent', compute='_compute_is_recent', search='_search_is_recent')
+
+    def _compute_is_recent(self):
+        one_hour_ago = fields.Datetime.now() - timedelta(hours=1)
+        for rec in self:
+            rec.is_recent = rec.create_date and rec.create_date >= one_hour_ago
+
+    def _search_is_recent(self, operator, value):
+        one_hour_ago = fields.Datetime.now() - timedelta(hours=1)
+        if (operator == '=' and value) or (operator == '!=' and not value):
+            return [('create_date', '>=', one_hour_ago)]
+        return [('create_date', '<', one_hour_ago)]
 
     # Receipt Details
     receipt_id = fields.Char(string='Receipt ID', readonly=True, copy=False)

@@ -27,7 +27,7 @@
         <field name="name">User Own Receipts Only (Last 1 Hour)</field>
         <field name="model_id" ref="model_sand_billing_receipt"/>
         <field name="domain_force">
-            [('user_id', '=', user.id), ('create_date', '&gt;=', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(time.time() - 3600)))]
+            [('user_id', '=', user.id), ('is_recent', '=', True)]
         </field>
         <field name="groups" eval="[(4, ref('sand_billing.group_sand_user'))]"/>
         <field name="perm_read" eval="True"/>
