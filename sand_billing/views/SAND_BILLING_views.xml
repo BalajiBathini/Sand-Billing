@@ -10,13 +10,14 @@
                 <field name="order_id" optional="hide"/>
 
                 <field name="customer_name"/>
-<field name="dispatch_date"/>
+
                 <field name="sand_quantity"/>
                 <field name="state"/>
                 <field name="vehicle_no"/>
                 <field name="driver_name"/>
                 <field name="driver_phone"/>
                 <field name="created_date"/>
+<field name="dispatch_date"/>
             </list>
         </field>
     </record>
